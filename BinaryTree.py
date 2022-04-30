@@ -97,16 +97,19 @@ class BinaryTree:  # The class of binary balanced tree
         if p is None:
             return p
         if p.key == k:  # Find the node p with the key k
-            if p.lchild is None and p.rchild is None:  # The case where node p has no subtree
+            if p.lchild is None and p.rchild is None:
+                # The case where node p has no subtree
                 p = None
                 return p  # directly replace the node p with the right child
-            elif p.rchild is None:  # The case where node p has only right subtree
+            elif p.rchild is None:
+                # The case where node p has only right subtree
                 p.lchild.parent = p.parent
                 p.lchild.ht = p.ht
                 p = p.lchild
                 p.lchild = None
                 return p
-            elif p.lchild is None:  # The case where node p has only left subtree
+            elif p.lchild is None:
+                # The case where node p has only left subtree
                 p.rchild.parent = p.parent
                 p = p.rchild
                 p.rchild = None
