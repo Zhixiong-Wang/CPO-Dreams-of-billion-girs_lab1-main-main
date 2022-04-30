@@ -1,35 +1,33 @@
+# Dreams of billion girls - lab 1 - variant 6
 
-# CPO-Dreams-of-billion-girls
+It is the laboratory work 1 of computational process organization.We need to realize the dictionary based on binary-tree.
 
-## Basic Information
+## Project structure
 
-> - ### title
->   &emsp;**Laboratory work 1**
-> - ### list of group members
->   - **Ye Shuzhan**
->       - ID in HDU: 212320031
->       - email: 765247983@qq.com
->   - **Wang Zhixiong**
->       - ID in HDU: 212320034
->       - email: 1006351013@qq.com
-> - ### laboratory work number
->   &emsp;**6. Dictionary based on binary-tree**
-> - ### variant description
->   &emsp;You need to check that your implementation correctly works with None value.
->   &emsp;You need to implement functions/methods for getting/setting value by key.
-> - ### synopsis
->   - Task division
->   - Design immutable version
->   - Design mutable version
->   - Conclusion
+- `mutable.py` -- implementation of `BinaryNode` class and `Dict` class with some necessary features.
 
-## Task division
+- `mutable_test.py` -- unit and tests for `Dict`.
 
-> - **Ye Shuzhan**: Implement and test the immutable versions.
-> - **Wang Zhixiong**: Implement and test the mutable versions.
+- `BinaryTree.py` -- The data structure definition of binary tree and some operations on binary tree.   
 
-## Conclusion
+## Features
 
-> - The mutable version is more flexible and easier to use than the immutable version.
-> - We've not completed mutable and immutable version.
-> - All functions will be updated gradually at a later date.
+- PBT: PBT tests will be updated as soon as we can.
+- unit:`test_insert`,`test_size`,`test_to_list`,`test_find`,`test_from_list`,`test_delete`
+- unit: `test_filter_func_value`,`test_map_func`,`test_reduce_func`
+- unit: `test_iter`,`test_mempty`,`test_mconcat`
+
+## Contribution
+
+- Ye Shuzhan (765247983@qq.com) -- mutable version.
+
+## Changelog
+
+- 30.04.2022 - 1
+  - Since it was found that some unsolvable problems occurred in the writing process of the binary balanced tree, the previous code was overturned, a simple binary tree was chosen as the new data structure, and the code was rewritten.
+- 15.04.2022 - 0
+  - Select a binary balanced tree as the data structure to implement the program named AVTree, complete part of the unit test
+
+## Design notes
+
+- ...
