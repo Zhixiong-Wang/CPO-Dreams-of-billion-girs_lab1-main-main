@@ -31,7 +31,7 @@ class BinaryNode:  # The node of binary balanced tree
         return self
 
 
-class BinaryTree:  # The class of binary balanced tree
+class BTree:  # The class of binary tree
     def __init__(self):
         self.r = None  # the root node
 
