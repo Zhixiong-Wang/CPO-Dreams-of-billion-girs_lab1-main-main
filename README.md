@@ -1,6 +1,7 @@
 # Dreams of billion girls - lab 1 - variant 6
 
-It is the laboratory work 1 of computational process organization.We need to realize the dictionary based on binary-tree.
+It is the laboratory work 1 of computational process organization.
+We need to realize the dictionary based on binary-tree.
 
 ## Project structure
 
@@ -8,7 +9,7 @@ It is the laboratory work 1 of computational process organization.We need to rea
 
 - `mutable_test.py` -- unit and tests for `Dict`.
 
-- `BinaryTree.py` -- The data structure definition of binary tree and some operations on binary tree.   
+- `BinaryTree.py` -- The data structure definition of binary tree and some operations on binary tree. 
 
 ## Features
 
