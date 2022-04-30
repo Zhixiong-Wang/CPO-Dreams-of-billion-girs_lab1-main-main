@@ -11,14 +11,16 @@ from collections.abc import Iterable
 
 
 class BinaryNode:  # The node of binary balanced tree
-    def __init__(self, k, d):  # The construction method, the new nodes are all leaves, and the height is 1
+    # The construction method, the new nodes are all leaves, and the height is
+    # 1
+    def __init__(self, k, d):
         self.key = k  # key
         self.data = d  # value
         self.lchild = None  # left pointer
         self.rchild = None  # right pointer
         self.parent = None  # the parent of node
         self.ht = 1  # The height of the subtree of the current node
-        self.key_sum=0
+        self.key_sum = 0
         for i in str(self.key):
             self.key_sum = self.key_sum + ord(i)
 
@@ -27,6 +29,7 @@ class BinaryNode:  # The node of binary balanced tree
 
     def __iter__(self) -> Iterator:
         return self
+
 
 class BinaryTree:  # The class of binary balanced tree
     def __init__(self):
@@ -53,21 +56,27 @@ class BinaryTree:  # The class of binary balanced tree
             return p
         elif child.key_sum < p.key_sum:  # The case of k<p.key
             if not p.lchild:
-                p.lchild=child
-                child.parent=p
+                p.lchild = child
+                child.parent = p
             else:
-                p.lchild = self._insert(p.lchild, k, d)  # insert (k,d) into the left subtree of p
+                # insert (k,d) into the left subtree of p
+                p.lchild = self._insert(p.lchild, k, d)
         else:  # The case of k>p.key
             if not p.rchild:
                 p.rchild = child
-                child.parent=p
+                child.parent = p
             else:
-                p.rchild = self._insert(p.rchild, k, d)  # insert (k,d) into the left subtree of p
-        p.ht = max(self.getht(p.lchild), self.getht(p.rchild)) + 1  # update the height of node p
+                # insert (k,d) into the left subtree of p
+                p.rchild = self._insert(p.rchild, k, d)
+        p.ht = max(
+            self.getht(
+                p.lchild), self.getht(
+                p.rchild)) + 1  # update the height of node p
         return p
 
     def search_by_key(self, k):  # Find the node with key k in the AVL tree
-        return self._search_by_key(self.r, k)  # r is the root node of the AVL tree
+        # r is the root node of the AVL tree
+        return self._search_by_key(self.r, k)
 
     def _search_by_key(self, p, k):  # Called by the search method
         if p is None:
@@ -75,9 +84,11 @@ class BinaryTree:  # The class of binary balanced tree
         if p.key == k:
             return p.data  # Return p.data when found
         if k < p.key:
-            return self._search_by_key(p.lchild, k)  # Find recursively in left subtree
+            # Find recursively in left subtree
+            return self._search_by_key(p.lchild, k)
         else:
-            return self._search_by_key(p.rchild, k)  # Find recursively in the right subtree
+            # Find recursively in the right subtree
+            return self._search_by_key(p.rchild, k)
 
     def delete(self, k):  # delete node with key k
         self.r = self._delete(self.r, k)
@@ -87,24 +98,24 @@ class BinaryTree:  # The class of binary balanced tree
             return p
         if p.key == k:  # Find the node p with the key k
             if p.lchild is None and p.rchild is None:  # The case where node p has no subtree
-                p=None
+                p = None
                 return p  # directly replace the node p with the right child
             elif p.rchild is None:  # The case where node p has only right subtree
-                p.lchild.parent=p.parent
-                p.lchild.ht=p.ht
-                p=p.lchild
-                p.lchild=None
+                p.lchild.parent = p.parent
+                p.lchild.ht = p.ht
+                p = p.lchild
+                p.lchild = None
                 return p
             elif p.lchild is None:  # The case where node p has only left subtree
-                p.rchild.parent=p.parent
-                p=p.rchild
-                p.rchild=None
+                p.rchild.parent = p.parent
+                p = p.rchild
+                p.rchild = None
                 return p  # directly replace the node p with the left child
             else:  # The case where node p has both left and right subtrees
-                p.lchild.parent=p.parent
-                p.lchild.rchild=p.rchild
-                p=p.lchild
-                p.lchild=None
+                p.lchild.parent = p.parent
+                p.lchild.rchild = p.rchild
+                p = p.lchild
+                p.lchild = None
                 return p
         # The case of k<p.key
         elif k < p.key:
@@ -158,5 +169,3 @@ class BinaryTree:  # The class of binary balanced tree
                 self._to_list(p.lchild)
             if p.rchild:
                 self._to_list(p.rchild)
-
-

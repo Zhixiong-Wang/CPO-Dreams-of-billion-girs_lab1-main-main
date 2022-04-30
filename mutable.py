@@ -10,6 +10,7 @@ from typing import Union
 from typing import Any
 from functools import reduce
 
+
 class AVLNode:
     def __init__(self, k, d):
         self.key = k
@@ -48,8 +49,10 @@ class Dict:
         return self.avl.size()
 
     def _to_list(self) -> List:
-        if self.avl.r == None: return []
-        else: return self.avl.to_list()
+        if self.avl.r is None:
+            return []
+        else:
+            return self.avl.to_list()
 
     def fromlist(self, lst):  # Convert list to binary balanced tree
         if len(lst) == 0:
@@ -71,8 +74,8 @@ class Dict:
         tolist = self._to_list()
         newlist = list(map(func, tolist))
         dict = Dict()
-        for i in range(0,len(newlist),2):
-            dict.avl.insert(newlist[i],newlist[i+1])
+        for i in range(0, len(newlist), 2):
+            dict.avl.insert(newlist[i], newlist[i + 1])
         return dict
 
     def reduce_func(self, func: Callable):
@@ -84,7 +87,7 @@ class Dict:
         return iter(self._to_list())
 
     def next(self) -> Iterator[Any]:
-        if self.avl.r == None:
+        if self.avl.r is None:
             raise StopIteration
         else:
             return iter(self._to_list())
@@ -95,13 +98,13 @@ class Dict:
 
     def mconcat(self, k, d) -> 'Dict':
         a = Dict()
-        a.insert(k,d)
-        if self.avl.r == None:
+        a.insert(k, d)
+        if self.avl.r is None:
             return a
-        elif a.avl.r == None:
+        elif a.avl.r is None:
             return self
         else:
             ls1 = a._to_list()
-            for i in range(0,len(ls1),2):
-                self.insert(ls1[i], ls1[i+1])
+            for i in range(0, len(ls1), 2):
+                self.insert(ls1[i], ls1[i + 1])
             return self

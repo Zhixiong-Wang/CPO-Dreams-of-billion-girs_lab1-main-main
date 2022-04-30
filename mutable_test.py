@@ -3,6 +3,7 @@ from hypothesis import given
 import hypothesis.strategies as st
 from mutable import *
 
+
 class TestMutableList(unittest.TestCase):
     def test_insert(self):
         dict = Dict()
@@ -61,6 +62,7 @@ class TestMutableList(unittest.TestCase):
         dict.insert(2, 10)
         dict.insert(1, 16)
         dict.insert(5, 20)
+
         def value_is_odd(x):
             return x % 2 == 1
         dict.filter_func(value_is_odd)
@@ -82,24 +84,25 @@ class TestMutableList(unittest.TestCase):
         self.assertEqual(dict.avl.r.lchild.data, 100)
 
     def test_reduce_func(self):
-        def add(x,y):
-            return x+y
+        def add(x, y):
+            return x + y
         dict = Dict()
         dict.insert(3, 14)
         dict.insert(2, 10)
         dict.insert(1, 16)
         dict.insert(5, 20)
-        sum=dict.reduce_func(add)
+        sum = dict.reduce_func(add)
         self.assertEqual(sum, 71)
 
     def test_iter(self):
-        list = [3,14,2,10,1,16,5,20]
+        list = [3, 14, 2, 10, 1, 16, 5, 20]
         dict = Dict().fromlist(list)
         tmp = []
         for e in dict:
             tmp.append(e)
         self.assertEqual(list, tmp)
-        # test that the two iterators on one data structure should work in parallel correctly
+        # test that the two iterators on one data structure should work in
+        # parallel correctly
         i1 = dict.__iter__()
         i2 = dict.__iter__()
         self.assertEqual(next(i1), 3)
@@ -114,7 +117,7 @@ class TestMutableList(unittest.TestCase):
         self.assertRaises(StopIteration, lambda: ls.next())
 
     def test_mempty(self):
-        dict=Dict()
+        dict = Dict()
         dict.insert(3, None)
         dict.insert("a", 2)
         dict.insert(5, 6)
@@ -133,7 +136,6 @@ class TestMutableList(unittest.TestCase):
         self.assertEqual(dict.avl.r.lchild.key, "1")
         self.assertEqual(dict.avl.r.lchild.data, 2)
         self.assertEqual(dict.avl.r.rchild.rchild.key, "abc")
-
 
 
 if __name__ == '__main__':
