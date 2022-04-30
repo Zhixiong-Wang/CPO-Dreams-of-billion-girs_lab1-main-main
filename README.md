@@ -32,7 +32,8 @@ We need to realize the dictionary based on binary-tree.
   - the previous code was overturned,
   - a simple binary tree was chosen as the new data structure, and the code was rewritten.
 - 15.04.2022 - 0
-  - Select a binary balanced tree as the data structure to implement the program named AVTree,
+  - Select a binary balanced tree as the data structure to 
+  - implement the program named AVTree,
   - complete part of the unit test
 
 ## Design notes
