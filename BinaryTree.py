@@ -24,7 +24,7 @@ class BinaryNode:  # The node of binary balanced tree
         for i in str(self.key):
             self.key_sum = self.key_sum + ord(i)
 
-    def __next__(self) -> 'AVLNode':
+    def __next__(self) -> 'BinaryNode':
         return self
 
     def __iter__(self) -> Iterator:
