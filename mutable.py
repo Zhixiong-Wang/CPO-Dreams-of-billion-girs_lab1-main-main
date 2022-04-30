@@ -1,5 +1,5 @@
 import BinaryTree
-from BinaryTree import BinaryTree
+from BinaryTree import BTree
 from typing import TypeVar
 from typing import Generic
 from typing import List
@@ -22,7 +22,7 @@ class AVLNode:
 
 class Dict:
     def __init__(self):
-        self.avl = BinaryTree()
+        self.avl = BTree()
 
     def insert(self, k, d):  # insert a node to tree
         self.avl.insert(k, d)
