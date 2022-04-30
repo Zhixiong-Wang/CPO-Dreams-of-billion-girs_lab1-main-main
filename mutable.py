@@ -1,5 +1,5 @@
 import BinaryTree
-from BinaryTree import BinaryTree
+from typing import BinaryTree
 from typing import TypeVar
 from typing import Generic
 from typing import List
