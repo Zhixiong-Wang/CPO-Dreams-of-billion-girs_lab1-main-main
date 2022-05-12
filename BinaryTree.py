@@ -23,7 +23,7 @@ class BinaryNode:  # The node of binary balanced tree
         for i in str(self.key):
             self.key_sum = self.key_sum + ord(i)
 
-    def __next__(self) -> 'AVLNode':
+    def __next__(self) -> 'BinaryNode':
         return self
 
     def __iter__(self) -> Iterator:
@@ -109,19 +109,16 @@ class BTree:  # The class of binary balanced tree
         if p is None:
             return p
         if p.key == k:  # Find the node p with the key k
-            # The case where node p has no subtree
-            if p.lchild is None and p.rchild is None:
+            if p.lchild is None and p.rchild is None:  # The case where node p has no subtree
                 p = None
                 return p  # directly replace the node p with the right child
-            # The case where node p has only right subtree
-            elif p.rchild is None:
+            elif p.rchild is None:  # The case where node p has only right subtree
                 p.lchild.parent = p.parent
                 # p.lchild.ht=p.ht
                 p = p.lchild
                 p.lchild = None
                 return p
-            # The case where node p has only left subtree
-            elif p.lchild is None:
+            elif p.lchild is None:  # The case where node p has only left subtree
                 p.rchild.parent = p.parent
                 p = p.rchild
                 p.rchild = None
@@ -173,6 +170,8 @@ class BTree:  # The class of binary balanced tree
         global res
         res = []
         if self.r is not None:
+            # res.append(self.r.key)
+            # res.append(self.r.data)
             self._to_list(self.r)
         return res
 
@@ -186,3 +185,18 @@ class BTree:  # The class of binary balanced tree
                 self._to_list(p.lchild)
             if p.rchild:
                 self._to_list(p.rchild)
+
+    def levelorder(self,p):
+        q = collections.deque()  # type: Deque[Any]
+        q.appendleft(p)
+        lst = []  # type: List
+        while len(q):
+            removed = q.pop()
+            lst.append(removed)
+            lst.append(removed.key, removed.data)
+            visit = self.get_node(removed.key, self.Root)
+            if visit.left:  # type: ignore
+                q.appendleft(visit.left)  # type: ignore
+            if visit.right:  # type: ignore
+                q.appendleft(visit.right)  # type: ignore
+        return lst

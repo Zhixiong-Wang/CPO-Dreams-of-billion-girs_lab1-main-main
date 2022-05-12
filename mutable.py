@@ -61,24 +61,18 @@ class Dict:
             return self.avl.to_list()
 
     def fromlist(self, lst) -> 'Dict':  # Convert list to binary balanced tree
-        # if lst == []:
-        #     return self
-        # else:
-        #     for i in lst:
-        #         self.insert(i.key,i.data)
-        #     return self
         if len(lst) == 0:
             return self
         elif len(lst) % 2 == 1:
-            return False
+            return self
         else:
             for i in range(0, len(lst), 2):
                 self.avl.insert(lst[i], lst[i + 1])
             return self
 
     def filter_func(self, func: Callable):
-        list = self._to_list()
-        newlist = filter(func, list)
+        list1 = self._to_list()
+        newlist = filter(func, list1)
         for i in newlist:
             self.delete(i)
 
@@ -94,12 +88,6 @@ class Dict:
         list = self._to_list()
         sum = reduce(func, list)
         return sum
-
-    def level_order(self):
-        if self.avl.r is None:
-            return []
-        else:
-            return self.avl.levelorder()
 
     def __iter__(self) -> Iterator:
         return iter(self._to_list())

@@ -170,15 +170,13 @@ class TestMutableList(unittest.TestCase):
     def test_from_list_to_list_equality(self, a):
         a = self.Datainitial(a)
         lst1 = []
-        lst2 = []
         for i in a:
             if i[0] not in lst1:
                 lst1.append(i[0])
                 lst1.append(i[1])
-                lst2.append(i[0])
-                lst2.append(i[1])
-        # lst1 = self.sort_res(lst1)
-        dict = Dict().fromlist(lst2)
+        lst1 = self.sort_res(lst1)
+        print(lst1)
+        dict = Dict().fromlist(lst1)
         b = dict._to_list()
         self.assertEqual(lst1, b)
 
@@ -186,16 +184,13 @@ class TestMutableList(unittest.TestCase):
     def test_python_len_and_list_size_equlity(self, a):
         a = self.Datainitial(a)
         lst1 = []
-        lst2 = []
         for i in a:
             if i[0] not in lst1:
                 lst1.append(i[0])
                 lst1.append(i[1])
-                lst2.append(i[0])
-                lst2.append(i[1])
-        dict = Dict().fromlist(lst2)
+        dict = Dict().fromlist(lst1)
         b = dict.size()
-        self.assertEqual(len(lst2) / 2, b)
+        self.assertEqual(len(lst1) / 2, b)
 
     @given(st.lists(st.tuples(st.integers(), st.integers())))
     def test_monoid_identity(self, a):
