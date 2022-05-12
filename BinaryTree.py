@@ -109,16 +109,19 @@ class BTree:  # The class of binary balanced tree
         if p is None:
             return p
         if p.key == k:  # Find the node p with the key k
-            if p.lchild is None and p.rchild is None:  # The case where node p has no subtree
+            # The case where node p has no subtree
+            if p.lchild is None and p.rchild is None:
                 p = None
                 return p  # directly replace the node p with the right child
-            elif p.rchild is None:  # The case where node p has only right subtree
+            # The case where node p has only right subtree
+            elif p.rchild is None:
                 p.lchild.parent = p.parent
                 # p.lchild.ht=p.ht
                 p = p.lchild
                 p.lchild = None
                 return p
-            elif p.lchild is None:  # The case where node p has only left subtree
+            # The case where node p has only left subtree
+            elif p.lchild is None:
                 p.rchild.parent = p.parent
                 p = p.rchild
                 p.rchild = None
@@ -186,17 +189,3 @@ class BTree:  # The class of binary balanced tree
             if p.rchild:
                 self._to_list(p.rchild)
 
-    def levelorder(self,p):
-        q = collections.deque()  # type: Deque[Any]
-        q.appendleft(p)
-        lst = []  # type: List
-        while len(q):
-            removed = q.pop()
-            lst.append(removed)
-            lst.append(removed.key, removed.data)
-            visit = self.get_node(removed.key, self.Root)
-            if visit.left:  # type: ignore
-                q.appendleft(visit.left)  # type: ignore
-            if visit.right:  # type: ignore
-                q.appendleft(visit.right)  # type: ignore
-        return lst
