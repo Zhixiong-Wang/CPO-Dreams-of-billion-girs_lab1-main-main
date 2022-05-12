@@ -188,4 +188,3 @@ class BTree:  # The class of binary balanced tree
                 self._to_list(p.lchild)
             if p.rchild:
                 self._to_list(p.rchild)
-
