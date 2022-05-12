@@ -19,26 +19,20 @@ class BinaryNode:  # The node of binary balanced tree
         self.lchild = None  # left pointer
         self.rchild = None  # right pointer
         self.parent = None  # the parent of node
-        self.ht = 1  # The height of the subtree of the current node
         self.key_sum = 0
         for i in str(self.key):
             self.key_sum = self.key_sum + ord(i)
 
-    def __next__(self) -> 'BinaryNode':
+    def __next__(self) -> 'AVLNode':
         return self
 
     def __iter__(self) -> Iterator:
         return self
 
 
-class BTree:  # The class of binary tree
+class BTree:  # The class of binary balanced tree
     def __init__(self):
         self.r = None  # the root node
-
-    def getht(self, p):  # return the height of subtree
-        if p is None:
-            return 0  # When the tree is empty the height of tree is 0
-        return p.ht
 
     def insert(self, k, d):  # insert the node (k,d)
         self.r = self._insert(self.r, k, d)
@@ -51,27 +45,42 @@ class BTree:  # The class of binary tree
         elif p is None:  # Create root node when the tree is empty
             q = BinaryNode(k, d)
             return q
-        elif child.key_sum == p.key_sum:
-            p.data = d  # update data
-            return p
-        elif child.key_sum < p.key_sum:  # The case of k<p.key
-            if not p.lchild:
-                p.lchild = child
-                child.parent = p
+        elif isinstance(k, int) and isinstance(p.key, int):
+            if child.key == p.key:
+                p.data = d  # update data
+                return p
+            elif child.key < p.key:
+                if not p.lchild:
+                    p.lchild = child
+                    child.parent = p
+                else:
+                    # insert (k,d) into the left subtree of p
+                    p.lchild = self._insert(p.lchild, k, d)
             else:
-                # insert (k,d) into the left subtree of p
-                p.lchild = self._insert(p.lchild, k, d)
-        else:  # The case of k>p.key
-            if not p.rchild:
-                p.rchild = child
-                child.parent = p
+                if not p.rchild:
+                    p.rchild = child
+                    child.parent = p
+                else:
+                    # insert (k,d) into the left subtree of p
+                    p.rchild = self._insert(p.rchild, k, d)
+        if isinstance(k, type("a")) or isinstance(p.key, str):
+            if child.key_sum == p.key_sum:
+                p.data = d  # update data
+                return p
+            elif child.key_sum < p.key_sum:
+                if not p.lchild:
+                    p.lchild = child
+                    child.parent = p
+                else:
+                    # insert (k,d) into the left subtree of p
+                    p.lchild = self._insert(p.lchild, k, d)
             else:
-                # insert (k,d) into the left subtree of p
-                p.rchild = self._insert(p.rchild, k, d)
-        p.ht = max(
-            self.getht(
-                p.lchild), self.getht(
-                p.rchild)) + 1  # update the height of node p
+                if not p.rchild:
+                    p.rchild = child
+                    child.parent = p
+                else:
+                    # insert (k,d) into the left subtree of p
+                    p.rchild = self._insert(p.rchild, k, d)
         return p
 
     def search_by_key(self, k):  # Find the node with key k in the AVL tree
@@ -79,11 +88,14 @@ class BTree:  # The class of binary tree
         return self._search_by_key(self.r, k)
 
     def _search_by_key(self, p, k):  # Called by the search method
+        k_key_sum = 0
+        for i in str(k):
+            k_key_sum = k_key_sum + ord(i)
         if p is None:
             return None  # An empty tree returns None
-        if p.key == k:
+        elif p.key_sum == k_key_sum:
             return p.data  # Return p.data when found
-        if k < p.key:
+        elif k_key_sum < p.key_sum:
             # Find recursively in left subtree
             return self._search_by_key(p.lchild, k)
         else:
@@ -97,19 +109,16 @@ class BTree:  # The class of binary tree
         if p is None:
             return p
         if p.key == k:  # Find the node p with the key k
-            if p.lchild is None and p.rchild is None:
-                # The case where node p has no subtree
+            if p.lchild is None and p.rchild is None:  # The case where node p has no subtree
                 p = None
                 return p  # directly replace the node p with the right child
-            elif p.rchild is None:
-                # The case where node p has only right subtree
+            elif p.rchild is None:  # The case where node p has only right subtree
                 p.lchild.parent = p.parent
-                p.lchild.ht = p.ht
+                # p.lchild.ht=p.ht
                 p = p.lchild
                 p.lchild = None
                 return p
-            elif p.lchild is None:
-                # The case where node p has only left subtree
+            elif p.lchild is None:  # The case where node p has only left subtree
                 p.rchild.parent = p.parent
                 p = p.rchild
                 p.rchild = None
@@ -128,7 +137,7 @@ class BTree:  # The class of binary tree
             # Delete the node with keyword k in the right subtree
             p.rchild = self._delete(p.rchild, k)
         # update the height of node p
-        p.ht = max(self.getht(p.lchild), self.getht(p.rchild)) + 1
+        # p.ht = max(self.getht(p.lchild), self.getht(p.rchild)) + 1
         return p
 
     def inorder(self):  # Traverse all nodes in order
@@ -160,7 +169,8 @@ class BTree:  # The class of binary tree
     def to_list(self):  # Convert binary balanced tree to list
         global res
         res = []
-        self._to_list(self.r)
+        if self.r is not None:
+            self._to_list(self.r)
         return res
 
     def _to_list(self, p):  # Called by the to_list method
@@ -168,6 +178,7 @@ class BTree:  # The class of binary tree
         if p is not None:
             res.append(p.key)
             res.append(p.data)
+            # res.append(BinaryNode(p.key,p.data))
             if p.lchild:
                 self._to_list(p.lchild)
             if p.rchild:
