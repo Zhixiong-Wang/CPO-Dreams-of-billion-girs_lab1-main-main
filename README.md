@@ -24,6 +24,7 @@ We need to realize the dictionary based on binary-tree.
 ## Contribution
 
 - Ye Shuzhan (765247983@qq.com) -- mutable version.
+- Wang Zhixiong (1006351013@qq.com) -- mutable version.
 
 ## Changelog
 
