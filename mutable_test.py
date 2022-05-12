@@ -49,12 +49,12 @@ class TestMutableList(unittest.TestCase):
     def test_delete(self):
         dict = Dict()
         dict.insert("a", 14)
-        dict.insert("ab", 10)
+        dict.insert("ab", "dd")
         dict.insert("abc", 16)
         dict.insert("ddd", 20)
         dict.delete("ddd")
         self.assertEqual(dict.find_by_key("ddd"), False)
-        self.assertEqual(dict.find_by_key("ab"), 10)
+        self.assertEqual(dict.find_by_key("ab"), "dd")
 
     def test_filter_func_value(self):
         dict = Dict()
