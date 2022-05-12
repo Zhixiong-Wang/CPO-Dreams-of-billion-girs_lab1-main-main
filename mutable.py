@@ -98,11 +98,11 @@ class Dict:
         else:
             return iter(self._to_list())
 
-    def mempty(self) -> 'Dict':
+    def mempty(self):
         self.avl.r = None
         return self
 
-    def mconcat(self, a: 'Dict') -> 'Dict':
+    def mconcat(self, a: 'Dict'):
         if self.avl.r is None:
             return a
         elif a.avl.r is None:
