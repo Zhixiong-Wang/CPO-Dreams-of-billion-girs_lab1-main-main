@@ -50,7 +50,7 @@ class Dict:
     def inorder(self) -> List:  # Traverse the tree in inorder
         return self.avl.inorder()
 
-    def find_by_key(self, k: K) -> Union[None, False]:  # find the node by key
+    def find_by_key(self, k: K) -> Union[bool, D]:  # find the node by key
         if self.avl.search_by_key(k) is None:
             return False
         else:
