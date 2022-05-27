@@ -3,6 +3,7 @@ from hypothesis import given
 import hypothesis.strategies as st
 from mutable import *
 
+
 class TestMutableList(unittest.TestCase):
     def test_insert(self: 'TestMutableList') -> None:
         dict1 = Dict()
