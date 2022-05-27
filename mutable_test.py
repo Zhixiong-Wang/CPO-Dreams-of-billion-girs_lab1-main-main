@@ -174,7 +174,8 @@ class TestMutableList(unittest.TestCase):
                         lst1[j + 1], lst1[j + 3] = lst1[j + 3], lst1[j + 1]
         return lst1
 
-    def Datainitial(self, set1) -> List[Any]:  # solve the data of the PBT tests
+    def Datainitial(self, set1) -> List[Any]:
+        # solve the data of the PBT tests
         seen = set()
         set1 = self.de_duplication(set1)
         set1 = [e for e in set1 if tuple(
