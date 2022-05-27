@@ -6,9 +6,9 @@ from mutable import *
 
 class TestMutableList(unittest.TestCase):
     def test_insert(self: 'TestMutableList') -> None:
-        dict1 = Dict()  # type:ignore
+        dict1 = Dict()
         dict1.insert(3, 14)
-        if dict1.find_by_key(3) is not None:
+        if dict1.avl.r is not None:
             self.assertEqual(dict1.avl.r.key, 3)
             self.assertEqual(dict1.avl.r.data, 14)
         dict1.insert("a", 10)
