@@ -6,6 +6,7 @@ from typing import List
 from typing import Iterator
 from typing import Callable
 from typing import Optional
+from typing import TypeGuard
 from typing import Generator
 from typing import Union
 from typing import Any
@@ -78,7 +79,7 @@ class Dict(object):
                 self.avl.insert(lst[i], lst[i + 1])
             return self
 
-    def filter_func(self, func: Callable[[Any, Optional[K]], Any]) -> None:
+    def filter_func(self, func: Callable[[Any], TypeGuard[Any]]) -> None:
         list1 = self._to_list()
         newlist = filter(func, list1)  # type: filter[Any]
         for i in newlist:
