@@ -62,17 +62,17 @@ class BTree(object):  # The class of binary balanced tree
             if child.key == p.key:
                 p.data = d  # update data
                 return p
-            elif child.key < p.key:
+            elif child.key < p.key:  # type:ignore
                 if not p.lchild:
-                    p.lchild = child
-                    child.parent = p
+                    p.lchild = child  # type:ignore
+                    child.parent = p  # type:ignore
                 else:
                     # insert (k,d) into the left subtree of p
                     p.lchild = self._insert(p.lchild, k, d)
             else:
                 if not p.rchild:
-                    p.rchild = child
-                    child.parent = p
+                    p.rchild = child  # type:ignore
+                    child.parent = p  # type:ignore
                 else:
                     # insert (k,d) into the left subtree of p
                     p.rchild = self._insert(p.rchild, k, d)
@@ -82,21 +82,22 @@ class BTree(object):  # The class of binary balanced tree
                 return p
             elif child.key_sum < p.key_sum:
                 if not p.lchild:
-                    p.lchild = child
-                    child.parent = p
+                    p.lchild = child  # type:ignore
+                    child.parent = p  # type:ignore
                 else:
                     # insert (k,d) into the left subtree of p
                     p.lchild = self._insert(p.lchild, k, d)
             else:
                 if not p.rchild:
-                    p.rchild = child
-                    child.parent = p
+                    p.rchild = child  # type:ignore
+                    child.parent = p  # type:ignore
                 else:
                     # insert (k,d) into the left subtree of p
                     p.rchild = self._insert(p.rchild, k, d)
         return p
 
-    def search_by_key(self, k: K):  # Find the node with key k in the AVL tree
+    def search_by_key(self, k: K) -> Union[BinaryNode, None]:
+        # Find the node with key k in the AVL tree
         # r is the root node of the AVL tree
         return self._search_by_key(self.r, k)
 
