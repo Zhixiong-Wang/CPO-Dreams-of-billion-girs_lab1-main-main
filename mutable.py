@@ -112,7 +112,7 @@ class Dict(object):
         self.avl.r = None
         return self
 
-    def mconcat(self, a: 'Dict') -> 'Dict':
+    def mconcat(self: 'Dict', a: 'Dict') -> 'Dict':
         if self.avl.r is None:
             return a
         elif a.avl.r is None:
