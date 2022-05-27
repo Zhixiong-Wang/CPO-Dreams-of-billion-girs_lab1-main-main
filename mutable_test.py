@@ -82,9 +82,8 @@ class TestMutableList(unittest.TestCase):
         dict1.insert(1, 16)
         dict1.insert(5, 20)
 
-        def value_is_odd(x: Any) -> TypeGuard[Any]:
-            if type(x) is not bool:
-                return x % 2 == 1
+        def value_is_odd(x: Any) -> Any:
+            return x % 2 == 1
 
         dict1.filter_func(value_is_odd)
         if dict1.avl.r is not None:
@@ -92,7 +91,7 @@ class TestMutableList(unittest.TestCase):
             self.assertEqual(dict1.avl.r.data, 10)
 
     def test_map_func(self) -> None:
-        def square(x: Any) -> TypeGuard[Any]:
+        def square(x: Any) -> Any:
             return x ** 2
 
         dict1 = Dict()
