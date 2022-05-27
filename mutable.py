@@ -81,14 +81,12 @@ class Dict(object):
             return self
 
     def filter_func(self, func: Callable[[Any], TypeGuard[Any]]) -> None:
-    # def filter_func(self, func: Callable) -> None:
         list1 = self._to_list()
         newlist = filter(func, list1)  # type: filter[Any]
         for i in newlist:
             self.delete(i)
 
     def map_func(self, func: Callable[[Any], TypeGuard[Any]]) -> 'Dict':
-    # def map_func(self, func: Callable) -> 'Dict':
         tolist = self._to_list()
         newlist = list(map(func, tolist))
         dict = Dict()
@@ -97,7 +95,6 @@ class Dict(object):
         return dict
 
     def reduce_func(self, func: Callable[[Any, Any], Any]) -> Any:
-    # def reduce_func(self, func: Callable) -> Any:
         list = self._to_list()
         sum = reduce(func, list)
         return sum
