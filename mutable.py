@@ -6,7 +6,7 @@ from typing import List
 from typing import Iterator
 from typing import Callable
 from typing import Optional
-from typing_extensions import TypeGuard
+from typing import TypeGuard
 from typing import Generator
 from typing import Union
 from typing import Any
