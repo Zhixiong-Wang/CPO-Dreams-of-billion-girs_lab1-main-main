@@ -81,7 +81,7 @@ class TestMutableList(unittest.TestCase):
         dict1.insert(1, 16)
         dict1.insert(5, 20)
 
-        def value_is_odd(x) -> Any:
+        def value_is_odd(x) -> int[Any]:
             return x % 2 == 1
         dict1.filter_func(value_is_odd)
         if dict1.avl.r is not None:
@@ -165,7 +165,7 @@ class TestMutableList(unittest.TestCase):
             self.assertEqual(dict1.avl.r.lchild.data, 2)
             self.assertEqual(dict1.avl.r.rchild.rchild.key, "abc")
 
-    def de_duplication(self, lst) -> List[Any]:
+    def de_duplication(self, lst) -> Any:
         for e in lst:
             count = 0
             for i in lst:
@@ -175,7 +175,7 @@ class TestMutableList(unittest.TestCase):
                     lst.remove(i)
         return lst
 
-    def sort_res(self, lst1) -> List[Any]:
+    def sort_res(self, lst1) -> Any:
         # lst1=[2,3,0,0,1,0,-1,5]
         if len(lst1) > 3:
             for i in range(0, len(lst1), 2):
@@ -194,7 +194,7 @@ class TestMutableList(unittest.TestCase):
         return set1
 
     @given(st.lists(st.tuples(st.integers(), st.integers())))
-    def test_from_list_to_list_equality(self, a) -> None:
+    def test_from_list_to_list_equality(self, a: List[Any]) -> None:
         a = self.Datainitial(a)
         lst1 = []
         for i in a:
@@ -208,7 +208,7 @@ class TestMutableList(unittest.TestCase):
         self.assertEqual(lst1, b)
 
     @given(st.lists(st.tuples(st.integers(), st.integers())))
-    def test_python_len_and_list_size_equlity(self, a) -> None:
+    def test_python_len_and_list_size_equlity(self, a: List[Any]) -> None:
         a = self.Datainitial(a)
         lst1 = []
         for i in a:
@@ -220,7 +220,7 @@ class TestMutableList(unittest.TestCase):
         self.assertEqual(len(lst1) / 2, b)
 
     @given(st.lists(st.tuples(st.integers(), st.integers())))
-    def test_monoid_identity(self, a) -> None:
+    def test_monoid_identity(self, a: List[Any]) -> None:
         a = self.Datainitial(a)
         lst1 = []
         for i in a:
@@ -236,7 +236,9 @@ class TestMutableList(unittest.TestCase):
     @given(st.lists(st.tuples(st.integers(), st.integers())),
            st.lists(st.tuples(st.integers(), st.integers())),
            st.lists(st.tuples(st.integers(), st.integers())))
-    def test_monoid_associativity(self, a, a1, a2) -> None:
+    def test_monoid_associativity(self, a: List[Any]
+                                  , a1: List[Any],
+                                  a2: List[Any]) -> None:
         a = self.Datainitial(a)
         a1 = self.Datainitial(a1)
         a2 = self.Datainitial(a2)
