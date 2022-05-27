@@ -10,7 +10,7 @@ from typing import Callable
 from typing import Generator
 from typing import Union
 from typing import Optional
-from typing import TypeGuard
+# from typing import TypeGuard
 from typing import Any
 import collections
 from collections.abc import Iterable
@@ -195,7 +195,7 @@ class TestMutableList(unittest.TestCase):
         seen = set()
         set1 = self.de_duplication(set1)
         set1 = [e for e in set1 if tuple(
-            e) not in seen and not seen.add(tuple(e))]
+            e) not in seen and seen.add(tuple(e))]
         return set1
 
     @given(st.lists(st.tuples(st.integers(), st.integers())))
@@ -207,7 +207,6 @@ class TestMutableList(unittest.TestCase):
                 lst1.append(i[0])
                 lst1.append(i[1])
         lst1 = self.sort_res(lst1)
-        print(lst1)
         dict1 = Dict().fromlist(lst1)
         b = dict1._to_list()
         self.assertEqual(lst1, b)
