@@ -10,11 +10,16 @@ from typing import Union
 from typing import Any
 from functools import reduce
 
+T = TypeVar('T')
+K = TypeVar('K', bound=Union[str, int, float])
+D = TypeVar('D', bound=Union[None, str, int, float])
+T12 = Union[K, D]
+
 
 class BinaryNode:  # The node of binary balanced tree
     # The construction method, the new nodes are all leaves, and the height is
     # 1
-    def __init__(self, k, d):
+    def __init__(self, k: K, d: D):
         self.key = k  # key
         self.data = d  # value
         self.lchild = None  # left pointer
@@ -36,22 +41,22 @@ class Dict:
     def __init__(self):
         self.avl = BTree()
 
-    def insert(self, k, d):  # insert a node to tree
+    def insert(self, k: K, d: D) -> None:  # insert a node to tree
         self.avl.insert(k, d)
 
-    def delete(self, k):
+    def delete(self, k) -> None:
         self.avl.delete(k)
 
-    def inorder(self):  # Traverse the tree in inorder
+    def inorder(self) -> List:  # Traverse the tree in inorder
         return self.avl.inorder()
 
-    def find_by_key(self, k):  # find the node by key
+    def find_by_key(self, k: K) -> Union[None, False]:  # find the node by key
         if self.avl.search_by_key(k) is None:
             return False
         else:
             return self.avl.search_by_key(k)
 
-    def size(self) -> int:   # calculate the size of tree
+    def size(self) -> int:  # calculate the size of tree
         return self.avl.size()
 
     def _to_list(self) -> List:
@@ -70,13 +75,13 @@ class Dict:
                 self.avl.insert(lst[i], lst[i + 1])
             return self
 
-    def filter_func(self, func: Callable):
+    def filter_func(self, func: Callable) -> None:
         list1 = self._to_list()
         newlist = filter(func, list1)
         for i in newlist:
             self.delete(i)
 
-    def map_func(self, func: Callable):
+    def map_func(self, func: Callable) -> 'Dict':
         tolist = self._to_list()
         newlist = list(map(func, tolist))
         dict = Dict()
@@ -84,7 +89,7 @@ class Dict:
             dict.avl.insert(newlist[i], newlist[i + 1])
         return dict
 
-    def reduce_func(self, func: Callable):
+    def reduce_func(self, func: Callable) -> 'K':
         list = self._to_list()
         sum = reduce(func, list)
         return sum
@@ -98,11 +103,11 @@ class Dict:
         else:
             return iter(self._to_list())
 
-    def mempty(self):
+    def mempty(self) -> 'Dict':
         self.avl.r = None
         return self
 
-    def mconcat(self, a: 'Dict'):
+    def mconcat(self, a: 'Dict') -> 'Dict':
         if self.avl.r is None:
             return a
         elif a.avl.r is None:

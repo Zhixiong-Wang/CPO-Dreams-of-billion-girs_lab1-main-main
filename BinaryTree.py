@@ -1,4 +1,4 @@
-from typing import TypeVar
+from typing import TypeVar, List, Any
 from typing import Generic
 from typing import List
 from typing import Iterator
@@ -8,12 +8,19 @@ from typing import Union
 from typing import Any
 import collections
 from collections.abc import Iterable
+global res
+res = []
+global count
+T = TypeVar('T')
+K = TypeVar('K', bound=Union[str, int, float])
+D = TypeVar('D', bound=Union[None, str, int, float])
+T12 = Union[K, D]
 
 
-class BinaryNode:  # The node of binary balanced tree
+class BinaryNode(Generic[K, D]):  # The node of binary balanced tree
     # The construction method, the new nodes are all leaves, and the height is
     # 1
-    def __init__(self, k, d):
+    def __init__(self, k: K, d: D):
         self.key = k  # key
         self.data = d  # value
         self.lchild = None  # left pointer
@@ -34,14 +41,13 @@ class BTree:  # The class of binary balanced tree
     def __init__(self):
         self.r = None  # the root node
 
-    def insert(self, k, d):  # insert the node (k,d)
+    def insert(self, k: K, d: D):  # insert the node (k,d)
         self.r = self._insert(self.r, k, d)
 
-    def _insert(self, p, k, d):  # Called by the insert method
+    def _insert(self, p: Union[BinaryNode, None], k: K, d: D) -> Union[BinaryNode, None]:  # Called by the insert method
         child = BinaryNode(k, d)
         if isinstance(k, type(None)):
             raise TypeError("NoneType object is not iterable")
-            return p
         elif p is None:  # Create root node when the tree is empty
             q = BinaryNode(k, d)
             return q
@@ -83,11 +89,12 @@ class BTree:  # The class of binary balanced tree
                     p.rchild = self._insert(p.rchild, k, d)
         return p
 
-    def search_by_key(self, k):  # Find the node with key k in the AVL tree
+    def search_by_key(self, k: K):  # Find the node with key k in the AVL tree
         # r is the root node of the AVL tree
         return self._search_by_key(self.r, k)
 
-    def _search_by_key(self, p, k):  # Called by the search method
+    def _search_by_key(self, p: Union[BinaryNode, None], k: K) -> Union[BinaryNode, None]:
+        # Called by the search method
         k_key_sum = 0
         for i in str(k):
             k_key_sum = k_key_sum + ord(i)
@@ -102,10 +109,11 @@ class BTree:  # The class of binary balanced tree
             # Find recursively in the right subtree
             return self._search_by_key(p.rchild, k)
 
-    def delete(self, k):  # delete node with key k
+    def delete(self, k: K):  # delete node with key k
         self.r = self._delete(self.r, k)
 
-    def _delete(self, p, k):  # Called by delete to delete k nodes
+    def _delete(self, p: Union[BinaryNode, None], k: K) -> Union[BinaryNode, None]:
+        # Called by delete to delete k nodes
         if p is None:
             return p
         if p.key == k:  # Find the node p with the key k
@@ -143,33 +151,33 @@ class BTree:  # The class of binary balanced tree
         # p.ht = max(self.getht(p.lchild), self.getht(p.rchild)) + 1
         return p
 
-    def inorder(self):  # Traverse all nodes in order
+    def inorder(self) -> List:  # Traverse all nodes in order
         global res
         res = []
         self._inorder(self.r)
         return res
 
-    def _inorder(self, p):  # Called by the inorder method
+    def _inorder(self, p: Union[BinaryNode, None]):  # Called by the inorder method
         global res
         if p is not None:
             self._inorder(p.lchild)
             res.append([p.key, p.data])
             self._inorder(p.rchild)
 
-    def size(self):  # Calculate the size of the tree
+    def size(self) -> int:  # Calculate the size of the tree
         global count
         count = 0
         self._size(self.r)
         return count
 
-    def _size(self, p):  # Called by the size method
+    def _size(self, p: Union[BinaryNode, None]):  # Called by the size method
         global count
         if p is not None:
             count = count + 1
             self._size(p.lchild)
             self._size(p.rchild)
 
-    def to_list(self):  # Convert binary balanced tree to list
+    def to_list(self) -> List:  # Convert binary balanced tree to list
         global res
         res = []
         if self.r is not None:
@@ -178,7 +186,7 @@ class BTree:  # The class of binary balanced tree
             self._to_list(self.r)
         return res
 
-    def _to_list(self, p):  # Called by the to_list method
+    def _to_list(self, p: Union[BinaryNode, None]):  # Called by the to_list method
         global res
         if p is not None:
             res.append(p.key)
