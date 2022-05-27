@@ -119,7 +119,7 @@ class BTree(object):  # The class of binary balanced tree
 
     def delete(self, k: K) -> None:
         # delete node with key k
-        self.r = self._delete(self.r, k)
+        self.r = self._delete(self.r, k)  # type:ignore
 
     def _delete(self, p: Union[BinaryNode, None], k: K) -> \
             Union[BinaryNode, None]:

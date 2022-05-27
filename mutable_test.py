@@ -6,7 +6,7 @@ from mutable import *
 
 class TestMutableList(unittest.TestCase):
     def test_insert(self: 'TestMutableList') -> 'BinaryNode':
-        dict1 = Dict()
+        dict1 = Dict()  # type:ignore
         dict1.insert(3, 14)
         self.assertEqual(dict1.avl.r.key, 3)
         self.assertEqual(dict1.avl.r.data, 14)
