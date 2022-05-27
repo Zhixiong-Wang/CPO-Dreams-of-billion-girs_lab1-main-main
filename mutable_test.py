@@ -10,6 +10,7 @@ from typing import Callable
 from typing import Generator
 from typing import Union
 from typing import Optional
+from typing import TypeGuard
 from typing import Any
 import collections
 from collections.abc import Iterable
@@ -81,7 +82,7 @@ class TestMutableList(unittest.TestCase):
         dict1.insert(1, 16)
         dict1.insert(5, 20)
 
-        def value_is_odd(x: object) -> TypeGuard[Any]:
+        def value_is_odd(x: Any) -> TypeGuard[Any]:
             return x % 2 == 1
 
         dict1.filter_func(value_is_odd)
@@ -90,7 +91,7 @@ class TestMutableList(unittest.TestCase):
             self.assertEqual(dict1.avl.r.data, 10)
 
     def test_map_func(self) -> None:
-        def square(x: object) -> TypeGuard[Any]:
+        def square(x: Any) -> TypeGuard[Any]:
             return x ** 2
 
         dict1 = Dict()
