@@ -1,4 +1,4 @@
-from typing import TypeVar, List, Any
+from typing import TypeVar, List, Any, Type
 from typing import Generic
 from typing import List
 from typing import Iterator
@@ -9,7 +9,7 @@ from typing import Any
 import collections
 from collections.abc import Iterable
 
-global res  # type:ignore
+global res  # type:List
 res = []
 global count
 T = TypeVar('T')
@@ -21,7 +21,7 @@ T12 = Union[K, D]
 class BinaryNode(Generic[K]):  # The node of binary balanced tree
     # The construction method, the new nodes are all leaves, and the height is
     # 1
-    obj_class = K
+    obj_class: Type[K]
 
     def __init__(self, k: K, d: D):
         self.key = k  # key
