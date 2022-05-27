@@ -9,7 +9,7 @@ from typing import Any
 import collections
 from collections.abc import Iterable
 
-global res  # type: List
+global res  # type:ignore
 res = []
 global count
 T = TypeVar('T')
