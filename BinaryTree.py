@@ -37,7 +37,7 @@ class BinaryNode(object):  # The node of binary balanced tree
     def __next__(self) -> 'BinaryNode':
         return self
 
-    def __iter__(self: 'BinaryNode') -> Iterator:
+    def __iter__(self: 'BinaryNode') -> Iterator[Any]:
         return self
 
 
@@ -45,7 +45,7 @@ class BTree(object):  # The class of binary balanced tree
     def __init__(self: 'BTree'):
         self.r = None  # the root node
 
-    def insert(self, k: K, d: D):  # insert the node (k,d)
+    def insert(self, k: K, d: D) -> None:  # insert the node (k,d)
         self.r = self._insert(self.r, k, d)
 
     def _insert(self, p: Union[BinaryNode, None], k: K, d: D) -> \
