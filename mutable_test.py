@@ -5,14 +5,16 @@ from mutable import *
 
 
 class TestMutableList(unittest.TestCase):
-    def test_insert(self: 'TestMutableList') -> 'BinaryNode':
+    def test_insert(self: 'TestMutableList') -> None:
         dict1 = Dict()  # type:ignore
         dict1.insert(3, 14)
-        self.assertEqual(dict1.avl.r.key, 3)
-        self.assertEqual(dict1.avl.r.data, 14)
+        if dict1.find_by_key(3) is not None:
+            self.assertEqual(dict1.avl.r.key, 3)
+            self.assertEqual(dict1.avl.r.data, 14)
         dict1.insert("a", 10)
         dict1.insert(1, 16)
-        self.assertEqual(dict1.avl.r.lchild.data, 16)
+        if dict1.find_by_key(1) is not None:
+            self.assertEqual(dict1.avl.r.lchild.data, 16)
 
     def test_size(self: 'TestMutableList') -> 'BinaryNode':
         dict1 = Dict()
