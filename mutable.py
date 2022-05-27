@@ -6,7 +6,7 @@ from typing import List
 from typing import Iterator
 from typing import Callable
 from typing import Optional
-# from typing import TypeGuard
+from typing import TypeGuard
 from typing import Generator
 from typing import Union
 from typing import Any
@@ -80,15 +80,15 @@ class Dict(object):
                 self.avl.insert(lst[i], lst[i + 1])
             return self
 
-    # def filter_func(self, func: Callable[[Any], TypeGuard[Any]]) -> None:
-    def filter_func(self, func: Callable) -> None:
+    def filter_func(self, func: Callable[[Any], TypeGuard[Any]]) -> None:
+    # def filter_func(self, func: Callable) -> None:
         list1 = self._to_list()
         newlist = filter(func, list1)  # type: filter[Any]
         for i in newlist:
             self.delete(i)
 
-    # def map_func(self, func: Callable[[Any], TypeGuard[Any]]) -> 'Dict':
-    def map_func(self, func: Callable) -> 'Dict':
+    def map_func(self, func: Callable[[Any], TypeGuard[Any]]) -> 'Dict':
+    # def map_func(self, func: Callable) -> 'Dict':
         tolist = self._to_list()
         newlist = list(map(func, tolist))
         dict = Dict()
@@ -96,8 +96,8 @@ class Dict(object):
             dict.avl.insert(newlist[i], newlist[i + 1])
         return dict
 
-    # def reduce_func(self, func: Callable[[Any, Any], Any]) -> Any:
-    def reduce_func(self, func: Callable) -> Any:
+    def reduce_func(self, func: Callable[[Any, Any], Any]) -> Any:
+    # def reduce_func(self, func: Callable) -> Any:
         list = self._to_list()
         sum = reduce(func, list)
         return sum
