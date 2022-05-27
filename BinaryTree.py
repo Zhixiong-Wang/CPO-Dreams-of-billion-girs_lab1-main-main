@@ -7,6 +7,7 @@ from typing import Iterator
 from typing import Callable
 from typing import Generator
 from typing import Union
+from typing import Optional
 from typing import Any
 import collections
 from collections.abc import Iterable
@@ -14,9 +15,8 @@ from collections.abc import Iterable
 global res
 res = []  # type: List[Any]
 global count
-T = TypeVar('T')
-K = TypeVar('K', bound=Union[str, int, float])
-D = TypeVar('D', bound=Union[None, str, int, float])
+K = Union[str, int, float]
+D = Union[None, str, int, float]
 T12 = Union[K, D]
 
 
@@ -24,7 +24,7 @@ class BinaryNode(object):  # The node of binary balanced tree
     # The construction method, the new nodes are all leaves, and the height is
     # 1
 
-    def __init__(self, k: K, d: D):
+    def __init__(self, k: Optional[K], d: Optional[D]):
         self.key = k  # key
         self.data = d  # value
         self.lchild = None  # left pointer
@@ -45,7 +45,7 @@ class BTree(object):  # The class of binary balanced tree
     def __init__(self: 'BTree'):
         self.r = None  # the root node
 
-    def insert(self, k: K, d: D) -> None:  # insert the node (k,d)
+    def insert(self, k: Optional[K], d: Optional[D]) -> None:  # insert the node (k,d)
         self.r = self._insert(self.r, k, d)
 
     def _insert(self, p: Union[BinaryNode, None], k: K, d: D) -> \
@@ -61,9 +61,9 @@ class BTree(object):  # The class of binary balanced tree
             if child.key == p.key:
                 p.data = d  # update data
                 return p
-            elif child.key < p.key:  # type: Union[str, int, float]
+            elif child.key < p.key:
                 if not p.lchild:
-                    p.lchild = child  # type: Union[BinaryNode, None]
+                    p.lchild = child
                     child.parent = p
                 else:
                     # insert (k,d) into the left subtree of p
