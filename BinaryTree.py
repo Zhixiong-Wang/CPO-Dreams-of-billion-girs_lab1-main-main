@@ -43,11 +43,11 @@ class BinaryNode(object):  # The node of binary balanced tree
 
 class BTree(object):  # The class of binary balanced tree
     def __init__(self: 'BTree'):
-        self.r = None  # the root node
+        self.r = None  # type: Union[BinaryNode, None]
 
     def insert(self: 'BTree', k: Optional[K], d: Optional[D]) -> None:
         # insert the node (k,d)
-        self.r = self._insert(self.r, k, d)  # type: Union[BinaryNode, None]
+        self.r = self._insert(self.r, k, d)
 
     def _insert(self, p: Union[BinaryNode, None], k: K, d: D) -> \
             'BinaryNode':
@@ -95,6 +95,7 @@ class BTree(object):  # The class of binary balanced tree
                     # insert (k,d) into the left subtree of p
                     p.rchild = self._insert(p.rchild, k, d)
         return p
+
 
     def search_by_key(self, k: K):  # Find the node with key k in the AVL tree
         # r is the root node of the AVL tree
