@@ -81,7 +81,7 @@ class TestMutableList(unittest.TestCase):
         dict1.insert(1, 16)
         dict1.insert(5, 20)
 
-        def value_is_odd(x) -> int[Any]:
+        def value_is_odd(x) -> int:
             return x % 2 == 1
         dict1.filter_func(value_is_odd)
         if dict1.avl.r is not None:
