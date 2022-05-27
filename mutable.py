@@ -86,7 +86,7 @@ class Dict(object):
         for i in newlist:
             self.delete(i)
 
-    def map_func(self, func: Callable[[Any], TypeGuard[Any]]) -> 'Dict':
+    def map_func(self, func: Callable[[Any], Any]) -> 'Dict':
         tolist = self._to_list()
         newlist = list(map(func, tolist))
         dict = Dict()
