@@ -44,7 +44,8 @@ class BTree:  # The class of binary balanced tree
     def insert(self, k: K, d: D):  # insert the node (k,d)
         self.r = self._insert(self.r, k, d)
 
-    def _insert(self, p: Union[BinaryNode, None], k: K, d: D) -> Union[BinaryNode, None]:  # Called by the insert method
+    def _insert(self, p: Union[BinaryNode, None], k: K, d: D) -> Union[BinaryNode, None]:
+        # Called by the insert method
         child = BinaryNode(k, d)
         if isinstance(k, type(None)):
             raise TypeError("NoneType object is not iterable")
@@ -93,7 +94,8 @@ class BTree:  # The class of binary balanced tree
         # r is the root node of the AVL tree
         return self._search_by_key(self.r, k)
 
-    def _search_by_key(self, p: Union[BinaryNode, None], k: K) -> Union[BinaryNode, None]:
+    def _search_by_key(self, p: Union[BinaryNode, None], k: K) -> \
+            Union[BinaryNode, None]:
         # Called by the search method
         k_key_sum = 0
         for i in str(k):
@@ -112,7 +114,8 @@ class BTree:  # The class of binary balanced tree
     def delete(self, k: K):  # delete node with key k
         self.r = self._delete(self.r, k)
 
-    def _delete(self, p: Union[BinaryNode, None], k: K) -> Union[BinaryNode, None]:
+    def _delete(self, p: Union[BinaryNode, None], k: K) -> \
+            Union[BinaryNode, None]:
         # Called by delete to delete k nodes
         if p is None:
             return p
@@ -157,7 +160,8 @@ class BTree:  # The class of binary balanced tree
         self._inorder(self.r)
         return res
 
-    def _inorder(self, p: Union[BinaryNode, None]):  # Called by the inorder method
+    def _inorder(self, p: Union[BinaryNode, None]):
+        # Called by the inorder method
         global res
         if p is not None:
             self._inorder(p.lchild)
@@ -186,7 +190,8 @@ class BTree:  # The class of binary balanced tree
             self._to_list(self.r)
         return res
 
-    def _to_list(self, p: Union[BinaryNode, None]):  # Called by the to_list method
+    def _to_list(self, p: Union[BinaryNode, None]):
+        # Called by the to_list method
         global res
         if p is not None:
             res.append(p.key)
