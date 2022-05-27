@@ -15,6 +15,7 @@ from collections.abc import Iterable
 global res
 res = []  # type: List[Any]
 global count
+count = 0  # type: int
 K = Union[str, int, float]
 D = Union[None, str, int, float]
 T12 = Union[K, D]
@@ -163,7 +164,7 @@ class BTree(object):  # The class of binary balanced tree
         # p.ht = max(self.getht(p.lchild), self.getht(p.rchild)) + 1
         return p
 
-    def inorder(self) -> List:  # Traverse all nodes in order
+    def inorder(self) -> List[Any]:  # Traverse all nodes in order
         global res
         res = []
         self._inorder(self.r)
@@ -183,14 +184,16 @@ class BTree(object):  # The class of binary balanced tree
         self._size(self.r)
         return count
 
-    def _size(self, p: Union[BinaryNode, None]):  # Called by the size method
+    def _size(self, p: Union[BinaryNode, None])  -> None:
+        # Called by the size method
         global count
         if p is not None:
             count = count + 1
             self._size(p.lchild)
             self._size(p.rchild)
 
-    def to_list(self) -> List:  # Convert binary balanced tree to list
+    def to_list(self) -> List[Any]:
+        # Convert binary balanced tree to list
         global res
         res = []
         if self.r is not None:
@@ -199,7 +202,7 @@ class BTree(object):  # The class of binary balanced tree
             self._to_list(self.r)
         return res
 
-    def _to_list(self, p: Union[BinaryNode, None]):
+    def _to_list(self, p: Union[BinaryNode, None])  -> None:
         # Called by the to_list method
         global res
         if p is not None:
