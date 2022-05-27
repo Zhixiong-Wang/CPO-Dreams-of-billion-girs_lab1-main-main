@@ -184,7 +184,7 @@ class BTree(object):  # The class of binary balanced tree
         self._size(self.r)
         return count
 
-    def _size(self, p: Union[BinaryNode, None])  -> None:
+    def _size(self, p: Union[BinaryNode, None]) -> None:
         # Called by the size method
         global count
         if p is not None:
@@ -202,7 +202,7 @@ class BTree(object):  # The class of binary balanced tree
             self._to_list(self.r)
         return res
 
-    def _to_list(self, p: Union[BinaryNode, None])  -> None:
+    def _to_list(self, p: Union[BinaryNode, None]) -> None:
         # Called by the to_list method
         global res
         if p is not None:
