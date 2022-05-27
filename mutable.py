@@ -80,9 +80,9 @@ class Dict(object):
                 self.avl.insert(lst[i], lst[i + 1])
             return self
 
-    def filter_func(self, func: Callable[[Any], TypeGuard[Any]]) -> None:
+    def filter_func(self, func: Callable[[Any], Any]) -> None:
         list1 = self._to_list()
-        newlist = filter(func, list1)  # type: filter[Any]
+        newlist = filter(func, list1)
         for i in newlist:
             self.delete(i)
 
