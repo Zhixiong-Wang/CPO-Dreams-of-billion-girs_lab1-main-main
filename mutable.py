@@ -45,8 +45,8 @@ class Dict(object):
         # insert a node to tree
         self.avl.insert(k, d)
 
-    def delete(self: 'Dict', k: Optional[K]) -> None:
-        self.avl.delete(k)
+    def delete(self: 'Dict', k: Optional[D]) -> None:
+        self.avl.delete(k)  # type:ignore
 
     def inorder(self: 'Dict') -> List[Any]:
         # Traverse the tree in inorder
@@ -61,13 +61,13 @@ class Dict(object):
     def size(self) -> int:  # calculate the size of tree
         return self.avl.size()
 
-    def _to_list(self) -> List:
+    def _to_list(self) -> List[Any]:
         if self.avl.r is None:
             return []
         else:
             return self.avl.to_list()
 
-    def fromlist(self: 'Dict', lst: List) -> 'Dict':
+    def fromlist(self: 'Dict', lst: List[Any]) -> 'Dict':
         # Convert list to binary balanced tree
         if len(lst) == 0:
             return self
@@ -78,7 +78,7 @@ class Dict(object):
                 self.avl.insert(lst[i], lst[i + 1])
             return self
 
-    def filter_func(self, func: Callable) -> None:
+    def filter_func(self, func: Optional[Callable]) -> None:
         list1 = self._to_list()
         newlist = filter(func, list1)
         for i in newlist:
