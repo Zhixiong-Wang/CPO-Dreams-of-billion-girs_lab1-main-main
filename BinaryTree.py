@@ -9,8 +9,8 @@ from typing import Any
 import collections
 from collections.abc import Iterable
 
-global res  # type:List
-res = []
+global res
+res = []  # type: List
 global count
 T = TypeVar('T')
 K = TypeVar('K', bound=Union[str, int, float])
