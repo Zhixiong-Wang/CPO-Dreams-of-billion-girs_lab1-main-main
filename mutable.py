@@ -6,7 +6,7 @@ from typing import List
 from typing import Iterator
 from typing import Callable
 from typing import Optional
-from typing import TypeGuard
+from typing_extensions import TypeGuard
 from typing import Generator
 from typing import Union
 from typing import Any
@@ -93,7 +93,7 @@ class Dict(object):
             dict.avl.insert(newlist[i], newlist[i + 1])
         return dict
 
-    def reduce_func(self, func: Callable[[Any], TypeGuard[Any]]) -> Any:
+    def reduce_func(self, func: Callable[[Any, Any], Any]) -> Any:
         list = self._to_list()
         sum = reduce(func, list)
         return sum
