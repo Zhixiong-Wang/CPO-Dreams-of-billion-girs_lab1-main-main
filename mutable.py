@@ -85,7 +85,7 @@ class Dict(object):
         for i in newlist:
             self.delete(i)
 
-    def map_func(self, func: Callable) -> 'Dict':
+    def map_func(self, func: Callable[[Any], TypeGuard[Any]]) -> 'Dict':
         tolist = self._to_list()
         newlist = list(map(func, tolist))
         dict = Dict()
@@ -93,12 +93,12 @@ class Dict(object):
             dict.avl.insert(newlist[i], newlist[i + 1])
         return dict
 
-    def reduce_func(self, func: Callable) -> int:
+    def reduce_func(self, func: Callable[[Any], TypeGuard[Any]]) -> Any:
         list = self._to_list()
         sum = reduce(func, list)
         return sum
 
-    def __iter__(self) -> Iterator:
+    def __iter__(self) -> Iterator[Any]:
         return iter(self._to_list())
 
     def next(self) -> Iterator[Any]:
