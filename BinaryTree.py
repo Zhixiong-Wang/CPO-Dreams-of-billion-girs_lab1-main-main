@@ -96,7 +96,7 @@ class BTree(object):  # The class of binary balanced tree
                     p.rchild = self._insert(p.rchild, k, d)
         return p
 
-    def search_by_key(self, k: K) -> Union[BinaryNode, None]:
+    def search_by_key(self, k: K) -> Optional[D]:
         # Find the node with key k in the AVL tree
         # r is the root node of the AVL tree
         return self._search_by_key(self.r, k)
