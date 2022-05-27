@@ -83,6 +83,7 @@ class TestMutableList(unittest.TestCase):
 
         def value_is_odd(x) -> int:
             return x % 2 == 1
+
         dict1.filter_func(value_is_odd)
         if dict1.avl.r is not None:
             self.assertEqual(dict1.avl.r.key, 2)
@@ -91,6 +92,7 @@ class TestMutableList(unittest.TestCase):
     def test_map_func(self) -> None:
         def square(x) -> Any:
             return x ** 2
+
         dict1 = Dict()
         dict1.insert(3, 14)
         dict1.insert(2, 10)
@@ -106,6 +108,7 @@ class TestMutableList(unittest.TestCase):
     def test_reduce_func(self) -> None:
         def add(x, y) -> Any:
             return x + y
+
         dict1 = Dict()
         dict1.insert(3, 14)
         dict1.insert(2, 10)
@@ -175,7 +178,8 @@ class TestMutableList(unittest.TestCase):
                     lst.remove(i)
         return lst
 
-    def sort_res(self, lst1) -> Any:
+    @staticmethod
+    def sort_res(lst1) -> Any:
         # lst1=[2,3,0,0,1,0,-1,5]
         if len(lst1) > 3:
             for i in range(0, len(lst1), 2):
@@ -236,8 +240,7 @@ class TestMutableList(unittest.TestCase):
     @given(st.lists(st.tuples(st.integers(), st.integers())),
            st.lists(st.tuples(st.integers(), st.integers())),
            st.lists(st.tuples(st.integers(), st.integers())))
-    def test_monoid_associativity(self, a: List[Any]
-                                  , a1: List[Any],
+    def test_monoid_associativity(self, a: List[Any], a1: List[Any],
                                   a2: List[Any]) -> None:
         a = self.Datainitial(a)
         a1 = self.Datainitial(a1)
