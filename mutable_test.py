@@ -194,9 +194,10 @@ class TestMutableList(unittest.TestCase):
         # solve the data of the PBT tests
         seen = set()
         set1 = self.de_duplication(set1)
-        set1 = [e for e in set1 if tuple(
-            e) not in seen and seen.add(tuple(e))]
-        return set1
+        for e in set1:
+            if tuple(e) not in seen:
+                seen.add(tuple(e))
+        return seen
 
     @given(st.lists(st.tuples(st.integers(), st.integers())))
     def test_from_list_to_list_equality(self, a: List[Any]) -> None:
@@ -220,6 +221,7 @@ class TestMutableList(unittest.TestCase):
                 lst1.append(i[0])
                 lst1.append(i[1])
         dict1 = Dict().fromlist(lst1)
+        print(lst1)
         b = dict1.size()
         self.assertEqual(len(lst1) / 2, b)
 
