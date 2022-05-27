@@ -5,7 +5,7 @@ from mutable import *
 
 
 class TestMutableList(unittest.TestCase):
-    def test_insert(self: 'TestMutableList') -> None:
+    def test_insert(self: 'TestMutableList') -> BinaryNode:
         dict1 = Dict()
         dict1.insert(3, 14)
         self.assertEqual(dict1.avl.r.key, 3)
@@ -14,7 +14,7 @@ class TestMutableList(unittest.TestCase):
         dict1.insert(1, 16)
         self.assertEqual(dict1.avl.r.lchild.data, 16)
 
-    def test_size(self: 'TestMutableList') -> None:
+    def test_size(self: 'TestMutableList') -> BinaryNode:
         dict1 = Dict()
         dict1.insert(1, 14)
         dict1.insert(2, 10)
