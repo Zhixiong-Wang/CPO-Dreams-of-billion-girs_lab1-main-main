@@ -78,9 +78,9 @@ class Dict(object):
                 self.avl.insert(lst[i], lst[i + 1])
             return self
 
-    def filter_func(self, func: Optional[Callable]) -> None:
+    def filter_func(self, func: Callable[[Any, Optional[K]], Any]) -> None:
         list1 = self._to_list()
-        newlist = filter(func, list1)
+        newlist = filter(func, list1)  # type: filter[Any]
         for i in newlist:
             self.delete(i)
 
@@ -92,7 +92,7 @@ class Dict(object):
             dict.avl.insert(newlist[i], newlist[i + 1])
         return dict
 
-    def reduce_func(self, func: Callable) -> 'K':
+    def reduce_func(self, func: Callable) -> int:
         list = self._to_list()
         sum = reduce(func, list)
         return sum
