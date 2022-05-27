@@ -16,13 +16,14 @@ class TestMutableList(unittest.TestCase):
         if dict1.avl.r is not None:
             self.assertEqual(dict1.avl.r.lchild.data, 16)
 
-    def test_size(self: 'TestMutableList') -> 'BinaryNode':
+    def test_size(self: 'TestMutableList') -> None:
         dict1 = Dict()
         dict1.insert(1, 14)
         dict1.insert(2, 10)
         dict1.insert(3, 16)
         dict1.insert("b", 20)
-        self.assertEqual(dict1.size(), 4)
+        if dict1.avl.r is not None:
+            self.assertEqual(dict1.size(), 4)
 
     def test_to_list(self) -> None:
         dict1 = Dict()
@@ -30,7 +31,8 @@ class TestMutableList(unittest.TestCase):
         dict1.insert("ab", 20)
         dict1.insert(2, 10)
         dict1.insert(3, 16)
-        self.assertEqual(dict1._to_list(), [1, 15, "ab", 20, 2, 10, 3, 16])
+        if dict1.avl.r is not None:
+            self.assertEqual(dict1._to_list(), [1, 15, "ab", 20, 2, 10, 3, 16])
 
     def test_find(self) -> None:
         dict1 = Dict()
@@ -38,27 +40,30 @@ class TestMutableList(unittest.TestCase):
         dict1.insert(2, 10)
         dict1.insert(1, 16)
         dict1.insert(5, 20)
-        self.assertEqual(dict1.find_by_key(1), 16)
-        self.assertEqual(dict1.find_by_key(6), False)
+        if dict1.avl.r is not None:
+            self.assertEqual(dict1.find_by_key(1), 16)
+            self.assertEqual(dict1.find_by_key(6), False)
 
-    def test_from_list(self):
+    def test_from_list(self) -> None:
         lst = [3, 14, 2, 10, 1, 16, 5, 20]
         dict1 = Dict().fromlist(lst)
-        self.assertEqual(dict1.avl.r.key, 3)
-        self.assertEqual(dict1.avl.r.lchild.data, 10)
-        self.assertEqual(dict1.avl.r.rchild.data, 20)
+        if dict1.avl.r is not None:
+            self.assertEqual(dict1.avl.r.key, 3)
+            self.assertEqual(dict1.avl.r.lchild.data, 10)
+            self.assertEqual(dict1.avl.r.rchild.data, 20)
 
-    def test_delete(self):
+    def test_delete(self) -> None:
         dict1 = Dict()
         dict1.insert("a", 14)
         dict1.insert("ab", "dd")
         dict1.insert("abc", 16)
         dict1.insert("ddd", 20)
         dict1.delete("ddd")
-        self.assertEqual(dict1.find_by_key("ddd"), False)  # type:ignore
-        self.assertEqual(dict1.find_by_key("ab"), "dd")  # type:ignore
+        if dict1.avl.r is not None:
+            self.assertEqual(dict1.find_by_key("ddd"), False)
+            self.assertEqual(dict1.find_by_key("ab"), "dd")
 
-    def test_filter_func_value(self):
+    def test_filter_func_value(self) -> None:
         dict1 = Dict()
         dict1.insert(3, 14)
         dict1.insert(2, 10)
@@ -68,10 +73,11 @@ class TestMutableList(unittest.TestCase):
         def value_is_odd(x):
             return x % 2 == 1
         dict1.filter_func(value_is_odd)
-        self.assertEqual(dict1.avl.r.key, 2)
-        self.assertEqual(dict1.avl.r.data, 10)
+        if dict1.avl.r is not None:
+            self.assertEqual(dict1.avl.r.key, 2)
+            self.assertEqual(dict1.avl.r.data, 10)
 
-    def test_map_func(self):
+    def test_map_func(self) -> None:
         def square(x):
             return x ** 2
         dict1 = Dict()
@@ -80,12 +86,13 @@ class TestMutableList(unittest.TestCase):
         dict1.insert(1, 16)
         dict1.insert(5, 20)
         dict1 = dict1.map_func(square)
-        self.assertEqual(dict1.avl.r.key, 9)
-        self.assertEqual(dict1.avl.r.data, 196)
-        self.assertEqual(dict1.avl.r.lchild.key, 4)
-        self.assertEqual(dict1.avl.r.lchild.data, 100)
+        if dict1.avl.r is not None:
+            self.assertEqual(dict1.avl.r.key, 9)
+            self.assertEqual(dict1.avl.r.data, 196)
+            self.assertEqual(dict1.avl.r.lchild.key, 4)
+            self.assertEqual(dict1.avl.r.lchild.data, 100)
 
-    def test_reduce_func(self):
+    def test_reduce_func(self) -> None:
         def add(x, y):
             return x + y
         dict1 = Dict()
@@ -94,38 +101,43 @@ class TestMutableList(unittest.TestCase):
         dict1.insert(1, 16)
         dict1.insert(5, 20)
         sum = dict1.reduce_func(add)
-        self.assertEqual(sum, 71)
+        if dict1.avl.r is not None:
+            self.assertEqual(sum, 71)
 
-    def test_iter(self):
+    def test_iter(self) -> None:
         list1 = [3, 14, 2, 10, 1, 16, 5, 20]
         dict1 = Dict().fromlist(list1)
         tmp = []
         for e in dict1:
             tmp.append(e)
-        self.assertEqual(list1, tmp)
+        if dict1.avl.r is not None:
+            self.assertEqual(list1, tmp)
         # test that the two iterators on one data structure should work in
         # parallel correctly
         i1 = dict1.__iter__()
         i2 = dict1.__iter__()
-        self.assertEqual(next(i1), 3)
-        self.assertEqual(next(i1), dict1.find_by_key(3))
-        self.assertEqual(next(i2), 3)
-        self.assertEqual(next(i2), dict1.find_by_key(3))
-        self.assertEqual(next(i1), 2)
+        if dict1.avl.r is not None:
+            self.assertEqual(next(i1), 3)
+            self.assertEqual(next(i1), dict1.find_by_key(3))
+            self.assertEqual(next(i2), 3)
+            self.assertEqual(next(i2), dict1.find_by_key(3))
+            self.assertEqual(next(i1), 2)
 
-        self.assertEqual(dict1._to_list(), tmp)
+            self.assertEqual(dict1._to_list(), tmp)
         dict1.__iter__()
         ls = Dict()
-        self.assertRaises(StopIteration, lambda: ls.next())
+        if dict1.avl.r is not None:
+            self.assertRaises(StopIteration, lambda: ls.next())
 
-    def test_mempty(self):
+    def test_mempty(self) -> None:
         dict1 = Dict()
         dict1.insert(3, None)
         dict1.insert("a", 2)
         dict1.insert(5, 6)
-        self.assertEqual(dict1.mempty().avl.r, None)
+        if dict1.avl.r is not None:
+            self.assertEqual(dict1.mempty().avl.r, None)
 
-    def test_mconcat(self):
+    def test_mconcat(self) -> None:
         dict1 = Dict()
         dict1.insert(3, 14)
         dict1.insert("1", 2)
@@ -133,13 +145,14 @@ class TestMutableList(unittest.TestCase):
         dict2 = Dict()
         dict2.insert("abc", 16)
         dict1.mconcat(dict2)
-        self.assertEqual(dict1.avl.r.key, 3)
-        self.assertEqual(dict1.avl.r.data, 14)
-        self.assertEqual(dict1.avl.r.rchild.key, 5)
-        self.assertEqual(dict1.avl.r.rchild.data, 6)
-        self.assertEqual(dict1.avl.r.lchild.key, "1")
-        self.assertEqual(dict1.avl.r.lchild.data, 2)
-        self.assertEqual(dict1.avl.r.rchild.rchild.key, "abc")
+        if dict1.avl.r is not None:
+            self.assertEqual(dict1.avl.r.key, 3)
+            self.assertEqual(dict1.avl.r.data, 14)
+            self.assertEqual(dict1.avl.r.rchild.key, 5)
+            self.assertEqual(dict1.avl.r.rchild.data, 6)
+            self.assertEqual(dict1.avl.r.lchild.key, "1")
+            self.assertEqual(dict1.avl.r.lchild.data, 2)
+            self.assertEqual(dict1.avl.r.rchild.rchild.key, "abc")
 
     def de_duplication(self, lst):
         for e in lst:
