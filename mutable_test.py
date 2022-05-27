@@ -154,8 +154,27 @@ class TestMutableList(unittest.TestCase):
             self.assertEqual(dict1.avl.r.lchild.data, 2)
             self.assertEqual(dict1.avl.r.rchild.rchild.key, "abc")
 
-    def Datainitial(self, set1) -> List[Any]:
-        # solve the data of the PBT tests
+    def de_duplication(self, lst) -> List[Any]:
+        for e in lst:
+            count = 0
+            for i in lst:
+                if e[0] == i[0] and count == 0:
+                    count = count + 1
+                else:
+                    lst.remove(i)
+        return lst
+
+    def sort_res(self, lst1) -> List[Any]:
+        # lst1=[2,3,0,0,1,0,-1,5]
+        if len(lst1) > 3:
+            for i in range(0, len(lst1), 2):
+                for j in range(2, len(lst1) - i - 2, 2):
+                    if lst1[j] > lst1[j + 2]:
+                        lst1[j], lst1[j + 2] = lst1[j + 2], lst1[j]
+                        lst1[j + 1], lst1[j + 3] = lst1[j + 3], lst1[j + 1]
+        return lst1
+
+    def Datainitial(self, set1) -> List[Any]:  # solve the data of the PBT tests
         seen = set()
         set1 = self.de_duplication(set1)
         set1 = [e for e in set1 if tuple(
