@@ -8,11 +8,11 @@ class TestMutableList(unittest.TestCase):
     def test_insert(self: 'TestMutableList') -> None:
         dict1 = Dict()
         dict1.insert(3, 14)
-        self.assertEqual(dict1.avl.r.key, 3)  # type:ignore
-        self.assertEqual(dict1.avl.r.data, 14)  # type:ignore
+        self.assertEqual(dict1.avl.r.key, 3)
+        self.assertEqual(dict1.avl.r.data, 14)
         dict1.insert("a", 10)
         dict1.insert(1, 16)
-        self.assertEqual(dict1.avl.r.lchild.data, 16)  # type:ignore
+        self.assertEqual(dict1.avl.r.lchild.data, 16)
 
     def test_size(self: 'TestMutableList') -> None:
         dict1 = Dict()
@@ -20,7 +20,7 @@ class TestMutableList(unittest.TestCase):
         dict1.insert(2, 10)
         dict1.insert(3, 16)
         dict1.insert("b", 20)
-        self.assertEqual(dict1.size(), 4)  # type:ignore
+        self.assertEqual(dict1.size(), 4)
 
     def test_to_list(self) -> None:
         dict1 = Dict()
@@ -28,8 +28,7 @@ class TestMutableList(unittest.TestCase):
         dict1.insert("ab", 20)
         dict1.insert(2, 10)
         dict1.insert(3, 16)
-        self.assertEqual(dict1._to_list(),
-                         [1, 15, "ab", 20, 2, 10, 3, 16])  # type:ignore
+        self.assertEqual(dict1._to_list(), [1, 15, "ab", 20, 2, 10, 3, 16])
 
     def test_find(self) -> None:
         dict1 = Dict()
@@ -37,15 +36,15 @@ class TestMutableList(unittest.TestCase):
         dict1.insert(2, 10)
         dict1.insert(1, 16)
         dict1.insert(5, 20)
-        self.assertEqual(dict1.find_by_key(1), 16)  # type:ignore
-        self.assertEqual(dict1.find_by_key(6), False)  # type:ignore
+        self.assertEqual(dict1.find_by_key(1), 16)
+        self.assertEqual(dict1.find_by_key(6), False)
 
     def test_from_list(self):
         lst = [3, 14, 2, 10, 1, 16, 5, 20]
         dict1 = Dict().fromlist(lst)
-        self.assertEqual(dict1.avl.r.key, 3)  # type:ignore
-        self.assertEqual(dict1.avl.r.lchild.data, 10)  # type:ignore
-        self.assertEqual(dict1.avl.r.rchild.data, 20)  # type:ignore
+        self.assertEqual(dict1.avl.r.key, 3)
+        self.assertEqual(dict1.avl.r.lchild.data, 10)
+        self.assertEqual(dict1.avl.r.rchild.data, 20)
 
     def test_delete(self):
         dict1 = Dict()
