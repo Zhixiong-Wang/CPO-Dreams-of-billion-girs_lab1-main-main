@@ -5,27 +5,27 @@ from typing import Generic
 from typing import List
 from typing import Iterator
 from typing import Callable
+from typing import Optional
 from typing import Generator
 from typing import Union
 from typing import Any
 from functools import reduce
 
-T = TypeVar('T')
-K = TypeVar('K', bound=Union[str, int, float])
-D = TypeVar('D', bound=Union[None, str, int, float])
-T12 = Union[K, D]
+K = Union[str, int, float]
+D = Union[None, str, int, float]
 
 
-class BinaryNode:  # The node of binary balanced tree
-    # The construction method, the new nodes are all leaves, and the height is
+class BinaryNode(object):  # The node of binary balanced tree
+    # The construction method,
+    # the new nodes are all leaves, and the height is
     # 1
-    def __init__(self, k: K, d: D):
+
+    def __init__(self, k: Optional[K], d: Optional[D]):
         self.key = k  # key
         self.data = d  # value
         self.lchild = None  # left pointer
         self.rchild = None  # right pointer
         self.parent = None  # the parent of node
-        # self.ht = 1  # The height of the subtree of the current node
         self.key_sum = 0
         for i in str(self.key):
             self.key_sum = self.key_sum + ord(i)
@@ -33,15 +33,16 @@ class BinaryNode:  # The node of binary balanced tree
     def __next__(self) -> 'BinaryNode':
         return self
 
-    def __iter__(self) -> Iterator:
+    def __iter__(self: 'BinaryNode') -> Iterator[Any]:
         return self
 
 
-class Dict:
-    def __init__(self):
+class Dict(object):
+    def __init__(self: 'Dict'):
         self.avl = BTree()
 
-    def insert(self, k: K, d: D) -> None:  # insert a node to tree
+    def insert(self: 'Dict', k: Optional[K], d: Optional[D]) -> None:
+        # insert a node to tree
         self.avl.insert(k, d)
 
     def delete(self, k) -> None:
