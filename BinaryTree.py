@@ -20,7 +20,7 @@ D = TypeVar('D', bound=Union[None, str, int, float])
 T12 = Union[K, D]
 
 
-class BinaryNode(Generic[K, D]):  # The node of binary balanced tree
+class BinaryNode('Generic[K, D]'):  # The node of binary balanced tree
     # The construction method, the new nodes are all leaves, and the height is
     # 1
 
