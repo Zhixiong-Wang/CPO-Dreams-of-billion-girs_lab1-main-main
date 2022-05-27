@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import TypeVar, List, Any, Type
 from typing import Generic
 from typing import List
@@ -18,10 +20,9 @@ D = TypeVar('D', bound=Union[None, str, int, float])
 T12 = Union[K, D]
 
 
-class BinaryNode(Generic[K]):  # The node of binary balanced tree
+class BinaryNode(Generic[K, D]):  # The node of binary balanced tree
     # The construction method, the new nodes are all leaves, and the height is
     # 1
-    obj_class: Type[K]
 
     def __init__(self, k: K, d: D):
         self.key = k  # key
