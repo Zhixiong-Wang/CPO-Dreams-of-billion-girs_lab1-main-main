@@ -13,7 +13,7 @@ class TestMutableList(unittest.TestCase):
             self.assertEqual(dict1.avl.r.data, 14)
         dict1.insert("a", 10)
         dict1.insert(1, 16)
-        if dict1.find_by_key(1) is not None:
+        if dict1.avl.r is not None:
             self.assertEqual(dict1.avl.r.lchild.data, 16)
 
     def test_size(self: 'TestMutableList') -> 'BinaryNode':
