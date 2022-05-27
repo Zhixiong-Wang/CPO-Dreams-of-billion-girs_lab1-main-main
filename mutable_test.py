@@ -70,7 +70,7 @@ class TestMutableList(unittest.TestCase):
         dict1.insert(1, 16)
         dict1.insert(5, 20)
 
-        def value_is_odd(x):
+        def value_is_odd(x) -> int:
             return x % 2 == 1
         dict1.filter_func(value_is_odd)
         if dict1.avl.r is not None:
@@ -78,7 +78,7 @@ class TestMutableList(unittest.TestCase):
             self.assertEqual(dict1.avl.r.data, 10)
 
     def test_map_func(self) -> None:
-        def square(x):
+        def square(x) -> int:
             return x ** 2
         dict1 = Dict()
         dict1.insert(3, 14)
@@ -93,7 +93,7 @@ class TestMutableList(unittest.TestCase):
             self.assertEqual(dict1.avl.r.lchild.data, 100)
 
     def test_reduce_func(self) -> None:
-        def add(x, y):
+        def add(x, y) -> int:
             return x + y
         dict1 = Dict()
         dict1.insert(3, 14)
@@ -154,27 +154,8 @@ class TestMutableList(unittest.TestCase):
             self.assertEqual(dict1.avl.r.lchild.data, 2)
             self.assertEqual(dict1.avl.r.rchild.rchild.key, "abc")
 
-    def de_duplication(self, lst):
-        for e in lst:
-            count = 0
-            for i in lst:
-                if e[0] == i[0] and count == 0:
-                    count = count + 1
-                else:
-                    lst.remove(i)
-        return lst
-
-    def sort_res(self, lst1):
-        # lst1=[2,3,0,0,1,0,-1,5]
-        if len(lst1) > 3:
-            for i in range(0, len(lst1), 2):
-                for j in range(2, len(lst1) - i - 2, 2):
-                    if lst1[j] > lst1[j + 2]:
-                        lst1[j], lst1[j + 2] = lst1[j + 2], lst1[j]
-                        lst1[j + 1], lst1[j + 3] = lst1[j + 3], lst1[j + 1]
-        return lst1
-
-    def Datainitial(self, set1):  # solve the data of the PBT tests
+    def Datainitial(self, set1) -> List[Any]:
+        # solve the data of the PBT tests
         seen = set()
         set1 = self.de_duplication(set1)
         set1 = [e for e in set1 if tuple(
@@ -182,7 +163,7 @@ class TestMutableList(unittest.TestCase):
         return set1
 
     @given(st.lists(st.tuples(st.integers(), st.integers())))
-    def test_from_list_to_list_equality(self, a):
+    def test_from_list_to_list_equality(self, a) -> None:
         a = self.Datainitial(a)
         lst1 = []
         for i in a:
@@ -196,7 +177,7 @@ class TestMutableList(unittest.TestCase):
         self.assertEqual(lst1, b)
 
     @given(st.lists(st.tuples(st.integers(), st.integers())))
-    def test_python_len_and_list_size_equlity(self, a):
+    def test_python_len_and_list_size_equlity(self, a) -> None:
         a = self.Datainitial(a)
         lst1 = []
         for i in a:
@@ -208,7 +189,7 @@ class TestMutableList(unittest.TestCase):
         self.assertEqual(len(lst1) / 2, b)
 
     @given(st.lists(st.tuples(st.integers(), st.integers())))
-    def test_monoid_identity(self, a):
+    def test_monoid_identity(self, a) -> None:
         a = self.Datainitial(a)
         lst1 = []
         for i in a:
@@ -224,7 +205,7 @@ class TestMutableList(unittest.TestCase):
     @given(st.lists(st.tuples(st.integers(), st.integers())),
            st.lists(st.tuples(st.integers(), st.integers())),
            st.lists(st.tuples(st.integers(), st.integers())))
-    def test_monoid_associativity(self, a, a1, a2):
+    def test_monoid_associativity(self, a, a1, a2) -> None:
         a = self.Datainitial(a)
         a1 = self.Datainitial(a1)
         a2 = self.Datainitial(a2)
