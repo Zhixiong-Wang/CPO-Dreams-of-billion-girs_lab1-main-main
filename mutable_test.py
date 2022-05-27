@@ -107,7 +107,7 @@ class TestMutableList(unittest.TestCase):
             self.assertEqual(dict1.avl.r.lchild.data, 100)
 
     def test_reduce_func(self) -> None:
-        def add(x, y) -> Any:
+        def add(x: Any, y: Any) -> Any:
             return x + y
 
         dict1 = Dict()
@@ -169,7 +169,7 @@ class TestMutableList(unittest.TestCase):
             self.assertEqual(dict1.avl.r.lchild.data, 2)
             self.assertEqual(dict1.avl.r.rchild.rchild.key, "abc")
 
-    def de_duplication(self, lst) -> Any:
+    def de_duplication(self, lst: List[Any]) -> Any:
         for e in lst:
             count = 0
             for i in lst:
@@ -180,7 +180,7 @@ class TestMutableList(unittest.TestCase):
         return lst
 
     @staticmethod
-    def sort_res(lst1) -> Any:
+    def sort_res(lst1: List[Any]) -> Any:
         # lst1=[2,3,0,0,1,0,-1,5]
         if len(lst1) > 3:
             for i in range(0, len(lst1), 2):
@@ -190,7 +190,7 @@ class TestMutableList(unittest.TestCase):
                         lst1[j + 1], lst1[j + 3] = lst1[j + 3], lst1[j + 1]
         return lst1
 
-    def Datainitial(self, set1) -> List[Any]:
+    def Datainitial(self, set1: List[Any]) -> Any:
         # solve the data of the PBT tests
         seen = set()
         set1 = self.de_duplication(set1)
