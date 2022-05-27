@@ -2,6 +2,17 @@ import unittest
 from hypothesis import given
 import hypothesis.strategies as st
 from mutable import *
+from typing import TypeVar, List, Any, Type
+from typing import Generic
+from typing import List
+from typing import Iterator
+from typing import Callable
+from typing import Generator
+from typing import Union
+from typing import Optional
+from typing import Any
+import collections
+from collections.abc import Iterable
 
 
 class TestMutableList(unittest.TestCase):
@@ -70,7 +81,7 @@ class TestMutableList(unittest.TestCase):
         dict1.insert(1, 16)
         dict1.insert(5, 20)
 
-        def value_is_odd(x) -> int:
+        def value_is_odd(x) -> Any:
             return x % 2 == 1
         dict1.filter_func(value_is_odd)
         if dict1.avl.r is not None:
@@ -78,7 +89,7 @@ class TestMutableList(unittest.TestCase):
             self.assertEqual(dict1.avl.r.data, 10)
 
     def test_map_func(self) -> None:
-        def square(x) -> int:
+        def square(x) -> Any:
             return x ** 2
         dict1 = Dict()
         dict1.insert(3, 14)
@@ -93,7 +104,7 @@ class TestMutableList(unittest.TestCase):
             self.assertEqual(dict1.avl.r.lchild.data, 100)
 
     def test_reduce_func(self) -> None:
-        def add(x, y) -> int:
+        def add(x, y) -> Any:
             return x + y
         dict1 = Dict()
         dict1.insert(3, 14)
