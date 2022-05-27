@@ -83,7 +83,8 @@ class TestMutableList(unittest.TestCase):
         dict1.insert(5, 20)
 
         def value_is_odd(x: Any) -> TypeGuard[Any]:
-            return x % 2 == 1
+            if type(x) is not bool:
+                return x % 2 == 1
 
         dict1.filter_func(value_is_odd)
         if dict1.avl.r is not None:
