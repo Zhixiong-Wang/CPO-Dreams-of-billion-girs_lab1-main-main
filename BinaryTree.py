@@ -8,7 +8,8 @@ from typing import Union
 from typing import Any
 import collections
 from collections.abc import Iterable
-global res
+
+global res  # type: List
 res = []
 global count
 T = TypeVar('T')
@@ -17,9 +18,11 @@ D = TypeVar('D', bound=Union[None, str, int, float])
 T12 = Union[K, D]
 
 
-class BinaryNode(Generic[K, D]):  # The node of binary balanced tree
+class BinaryNode(Generic[K]):  # The node of binary balanced tree
     # The construction method, the new nodes are all leaves, and the height is
     # 1
+    obj_class = K
+
     def __init__(self, k: K, d: D):
         self.key = k  # key
         self.data = d  # value
