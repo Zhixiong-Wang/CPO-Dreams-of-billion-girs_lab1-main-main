@@ -3,141 +3,141 @@ from hypothesis import given
 import hypothesis.strategies as st
 from mutable import *
 
-
 class TestMutableList(unittest.TestCase):
-    def test_insert(self):
-        dict = Dict()
-        dict.insert(3, 14)
-        self.assertEqual(dict.avl.r.key, 3)
-        self.assertEqual(dict.avl.r.data, 14)
-        dict.insert("a", 10)
-        dict.insert(1, 16)
-        self.assertEqual(dict.avl.r.lchild.data, 16)
+    def test_insert(self: 'TestMutableList') -> None:
+        dict1 = Dict()
+        dict1.insert(3, 14)
+        self.assertEqual(dict1.avl.r.key, 3)  # type:ignore
+        self.assertEqual(dict1.avl.r.data, 14)  # type:ignore
+        dict1.insert("a", 10)
+        dict1.insert(1, 16)
+        self.assertEqual(dict1.avl.r.lchild.data, 16)  # type:ignore
 
-    def test_size(self):
-        dict = Dict()
-        dict.insert(1, 14)
-        dict.insert(2, 10)
-        dict.insert(3, 16)
-        dict.insert("b", 20)
-        self.assertEqual(dict.size(), 4)
+    def test_size(self: 'TestMutableList') -> None:
+        dict1 = Dict()
+        dict1.insert(1, 14)
+        dict1.insert(2, 10)
+        dict1.insert(3, 16)
+        dict1.insert("b", 20)
+        self.assertEqual(dict1.size(), 4)  # type:ignore
 
-    def test_to_list(self):
-        dict = Dict()
-        dict.insert(1, 15)
-        dict.insert("ab", 20)
-        dict.insert(2, 10)
-        dict.insert(3, 16)
-        self.assertEqual(dict._to_list(), [1, 15, "ab", 20, 2, 10, 3, 16])
+    def test_to_list(self) -> None:
+        dict1 = Dict()
+        dict1.insert(1, 15)
+        dict1.insert("ab", 20)
+        dict1.insert(2, 10)
+        dict1.insert(3, 16)
+        self.assertEqual(dict1._to_list(),
+                         [1, 15, "ab", 20, 2, 10, 3, 16])  # type:ignore
 
-    def test_find(self):
-        dict = Dict()
-        dict.insert(3, 14)
-        dict.insert(2, 10)
-        dict.insert(1, 16)
-        dict.insert(5, 20)
-        self.assertEqual(dict.find_by_key(1), 16)
-        self.assertEqual(dict.find_by_key(6), False)
+    def test_find(self) -> None:
+        dict1 = Dict()
+        dict1.insert(3, 14)
+        dict1.insert(2, 10)
+        dict1.insert(1, 16)
+        dict1.insert(5, 20)
+        self.assertEqual(dict1.find_by_key(1), 16)  # type:ignore
+        self.assertEqual(dict1.find_by_key(6), False)  # type:ignore
 
     def test_from_list(self):
         lst = [3, 14, 2, 10, 1, 16, 5, 20]
-        dict = Dict().fromlist(lst)
-        self.assertEqual(dict.avl.r.key, 3)
-        self.assertEqual(dict.avl.r.lchild.data, 10)
-        self.assertEqual(dict.avl.r.rchild.data, 20)
+        dict1 = Dict().fromlist(lst)
+        self.assertEqual(dict1.avl.r.key, 3)  # type:ignore
+        self.assertEqual(dict1.avl.r.lchild.data, 10)  # type:ignore
+        self.assertEqual(dict1.avl.r.rchild.data, 20)  # type:ignore
 
     def test_delete(self):
-        dict = Dict()
-        dict.insert("a", 14)
-        dict.insert("ab", "dd")
-        dict.insert("abc", 16)
-        dict.insert("ddd", 20)
-        dict.delete("ddd")
-        self.assertEqual(dict.find_by_key("ddd"), False)
-        self.assertEqual(dict.find_by_key("ab"), "dd")
+        dict1 = Dict()
+        dict1.insert("a", 14)
+        dict1.insert("ab", "dd")
+        dict1.insert("abc", 16)
+        dict1.insert("ddd", 20)
+        dict1.delete("ddd")
+        self.assertEqual(dict1.find_by_key("ddd"), False)  # type:ignore
+        self.assertEqual(dict1.find_by_key("ab"), "dd")  # type:ignore
 
     def test_filter_func_value(self):
-        dict = Dict()
-        dict.insert(3, 14)
-        dict.insert(2, 10)
-        dict.insert(1, 16)
-        dict.insert(5, 20)
+        dict1 = Dict()
+        dict1.insert(3, 14)
+        dict1.insert(2, 10)
+        dict1.insert(1, 16)
+        dict1.insert(5, 20)
 
         def value_is_odd(x):
             return x % 2 == 1
-        dict.filter_func(value_is_odd)
-        self.assertEqual(dict.avl.r.key, 2)
-        self.assertEqual(dict.avl.r.data, 10)
+        dict1.filter_func(value_is_odd)
+        self.assertEqual(dict1.avl.r.key, 2)
+        self.assertEqual(dict1.avl.r.data, 10)
 
     def test_map_func(self):
         def square(x):
             return x ** 2
-        dict = Dict()
-        dict.insert(3, 14)
-        dict.insert(2, 10)
-        dict.insert(1, 16)
-        dict.insert(5, 20)
-        dict = dict.map_func(square)
-        self.assertEqual(dict.avl.r.key, 9)
-        self.assertEqual(dict.avl.r.data, 196)
-        self.assertEqual(dict.avl.r.lchild.key, 4)
-        self.assertEqual(dict.avl.r.lchild.data, 100)
+        dict1 = Dict()
+        dict1.insert(3, 14)
+        dict1.insert(2, 10)
+        dict1.insert(1, 16)
+        dict1.insert(5, 20)
+        dict1 = dict1.map_func(square)
+        self.assertEqual(dict1.avl.r.key, 9)
+        self.assertEqual(dict1.avl.r.data, 196)
+        self.assertEqual(dict1.avl.r.lchild.key, 4)
+        self.assertEqual(dict1.avl.r.lchild.data, 100)
 
     def test_reduce_func(self):
         def add(x, y):
             return x + y
-        dict = Dict()
-        dict.insert(3, 14)
-        dict.insert(2, 10)
-        dict.insert(1, 16)
-        dict.insert(5, 20)
-        sum = dict.reduce_func(add)
+        dict1 = Dict()
+        dict1.insert(3, 14)
+        dict1.insert(2, 10)
+        dict1.insert(1, 16)
+        dict1.insert(5, 20)
+        sum = dict1.reduce_func(add)
         self.assertEqual(sum, 71)
 
     def test_iter(self):
         list1 = [3, 14, 2, 10, 1, 16, 5, 20]
-        dict = Dict().fromlist(list1)
+        dict1 = Dict().fromlist(list1)
         tmp = []
-        for e in dict:
+        for e in dict1:
             tmp.append(e)
         self.assertEqual(list1, tmp)
         # test that the two iterators on one data structure should work in
         # parallel correctly
-        i1 = dict.__iter__()
-        i2 = dict.__iter__()
+        i1 = dict1.__iter__()
+        i2 = dict1.__iter__()
         self.assertEqual(next(i1), 3)
-        self.assertEqual(next(i1), dict.find_by_key(3))
+        self.assertEqual(next(i1), dict1.find_by_key(3))
         self.assertEqual(next(i2), 3)
-        self.assertEqual(next(i2), dict.find_by_key(3))
+        self.assertEqual(next(i2), dict1.find_by_key(3))
         self.assertEqual(next(i1), 2)
 
-        self.assertEqual(dict._to_list(), tmp)
-        dict.__iter__()
+        self.assertEqual(dict1._to_list(), tmp)
+        dict1.__iter__()
         ls = Dict()
         self.assertRaises(StopIteration, lambda: ls.next())
 
     def test_mempty(self):
-        dict = Dict()
-        dict.insert(3, None)
-        dict.insert("a", 2)
-        dict.insert(5, 6)
-        self.assertEqual(dict.mempty().avl.r, None)
+        dict1 = Dict()
+        dict1.insert(3, None)
+        dict1.insert("a", 2)
+        dict1.insert(5, 6)
+        self.assertEqual(dict1.mempty().avl.r, None)
 
     def test_mconcat(self):
-        dict = Dict()
-        dict.insert(3, 14)
-        dict.insert("1", 2)
-        dict.insert(5, 6)
         dict1 = Dict()
-        dict1.insert("abc", 16)
-        dict.mconcat(dict1)
-        self.assertEqual(dict.avl.r.key, 3)
-        self.assertEqual(dict.avl.r.data, 14)
-        self.assertEqual(dict.avl.r.rchild.key, 5)
-        self.assertEqual(dict.avl.r.rchild.data, 6)
-        self.assertEqual(dict.avl.r.lchild.key, "1")
-        self.assertEqual(dict.avl.r.lchild.data, 2)
-        self.assertEqual(dict.avl.r.rchild.rchild.key, "abc")
+        dict1.insert(3, 14)
+        dict1.insert("1", 2)
+        dict1.insert(5, 6)
+        dict2 = Dict()
+        dict2.insert("abc", 16)
+        dict1.mconcat(dict2)
+        self.assertEqual(dict1.avl.r.key, 3)
+        self.assertEqual(dict1.avl.r.data, 14)
+        self.assertEqual(dict1.avl.r.rchild.key, 5)
+        self.assertEqual(dict1.avl.r.rchild.data, 6)
+        self.assertEqual(dict1.avl.r.lchild.key, "1")
+        self.assertEqual(dict1.avl.r.lchild.data, 2)
+        self.assertEqual(dict1.avl.r.rchild.rchild.key, "abc")
 
     def de_duplication(self, lst):
         for e in lst:
@@ -176,8 +176,8 @@ class TestMutableList(unittest.TestCase):
                 lst1.append(i[1])
         lst1 = self.sort_res(lst1)
         print(lst1)
-        dict = Dict().fromlist(lst1)
-        b = dict._to_list()
+        dict1 = Dict().fromlist(lst1)
+        b = dict1._to_list()
         self.assertEqual(lst1, b)
 
     @given(st.lists(st.tuples(st.integers(), st.integers())))
@@ -188,8 +188,8 @@ class TestMutableList(unittest.TestCase):
             if i[0] not in lst1:
                 lst1.append(i[0])
                 lst1.append(i[1])
-        dict = Dict().fromlist(lst1)
-        b = dict.size()
+        dict1 = Dict().fromlist(lst1)
+        b = dict1.size()
         self.assertEqual(len(lst1) / 2, b)
 
     @given(st.lists(st.tuples(st.integers(), st.integers())))
@@ -200,11 +200,11 @@ class TestMutableList(unittest.TestCase):
             if i[0] not in lst1:
                 lst1.append(i[0])
                 lst1.append(i[1])
-        dict = Dict().fromlist(lst1)
-        dict_empty = dict.mempty()
-        self.assertEqual(dict.mconcat(dict_empty), dict)
-        self.assertEqual(dict_empty.mconcat(dict), dict)
-        self.assertEqual(dict.mconcat(dict_empty), dict_empty.mconcat(dict))
+        dict1 = Dict().fromlist(lst1)
+        dict_empty = dict1.mempty()
+        self.assertEqual(dict1.mconcat(dict_empty), dict1)
+        self.assertEqual(dict_empty.mconcat(dict1), dict1)
+        self.assertEqual(dict1.mconcat(dict_empty), dict_empty.mconcat(dict1))
 
     @given(st.lists(st.tuples(st.integers(), st.integers())),
            st.lists(st.tuples(st.integers(), st.integers())),

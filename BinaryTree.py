@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import TypeVar, List, Any, Type
 from typing import Generic
 from typing import List
@@ -44,7 +42,7 @@ class BinaryNode(object):  # The node of binary balanced tree
 
 class BTree(object):  # The class of binary balanced tree
     def __init__(self: 'BTree'):
-        self.r = None
+        self.r = None  # type:ignore
 
     def insert(self: 'BTree', k: Optional[K], d: Optional[D]) -> None:
         # insert the node (k,d)
