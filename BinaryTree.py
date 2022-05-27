@@ -102,7 +102,7 @@ class BTree(object):  # The class of binary balanced tree
         return self._search_by_key(self.r, k)
 
     def _search_by_key(self, p: Union[BinaryNode, None], k: K) -> \
-            Union[BinaryNode, None]:
+            Optional[D]:
         # Called by the search method
         k_key_sum = 0
         for i in str(k):
@@ -118,8 +118,9 @@ class BTree(object):  # The class of binary balanced tree
             # Find recursively in the right subtree
             return self._search_by_key(p.rchild, k)
 
-    def delete(self, k: K):  # delete node with key k
-        self.r = self._delete(self.r, k)
+    def delete(self, k: K) -> None:
+        # delete node with key k
+        self.r = self._delete(self.r, k)  # type:ignore
 
     def _delete(self, p: Union[BinaryNode, None], k: K) -> \
             Union[BinaryNode, None]:
@@ -151,12 +152,13 @@ class BTree(object):  # The class of binary balanced tree
                 p.lchild = None
                 return p
         # The case of k<p.key
-        elif k < p.key:
+        elif k < p.key:  # type:ignore
             # Delete the node with keyword k in the left subtree
-            p.lchild = self._delete(p.lchild, k)
-        elif k > p.key:  # The case of k>p.key
+            p.lchild = self._delete(p.lchild, k)  # type:ignore
+        elif k > p.key:  # type:ignore
+            # The case of k>p.key
             # Delete the node with keyword k in the right subtree
-            p.rchild = self._delete(p.rchild, k)
+            p.rchild = self._delete(p.rchild, k)  # type:ignore
         # update the height of node p
         # p.ht = max(self.getht(p.lchild), self.getht(p.rchild)) + 1
         return p
@@ -167,7 +169,7 @@ class BTree(object):  # The class of binary balanced tree
         self._inorder(self.r)
         return res
 
-    def _inorder(self, p: Union[BinaryNode, None]):
+    def _inorder(self, p: Union[BinaryNode, None]) -> None:
         # Called by the inorder method
         global res
         if p is not None:
