@@ -61,7 +61,7 @@ class BTree(object):  # The class of binary balanced tree
             if child.key == p.key:
                 p.data = d  # update data
                 return p
-            elif child.key < p.key:  # type: K
+            elif child.key < p.key:  # type: Union[str, int, float]
                 if not p.lchild:
                     p.lchild = child  # type: Union[BinaryNode, None]
                     child.parent = p
