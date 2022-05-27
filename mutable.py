@@ -45,10 +45,11 @@ class Dict(object):
         # insert a node to tree
         self.avl.insert(k, d)
 
-    def delete(self, k) -> None:
+    def delete(self: 'Dict', k: Optional[K]) -> None:
         self.avl.delete(k)
 
-    def inorder(self) -> List:  # Traverse the tree in inorder
+    def inorder(self: 'Dict') -> List[Any]:
+        # Traverse the tree in inorder
         return self.avl.inorder()
 
     def find_by_key(self, k: K) -> Union[bool, D]:  # find the node by key
@@ -66,7 +67,8 @@ class Dict(object):
         else:
             return self.avl.to_list()
 
-    def fromlist(self, lst) -> 'Dict':  # Convert list to binary balanced tree
+    def fromlist(self: 'Dict', lst: List) -> 'Dict':
+        # Convert list to binary balanced tree
         if len(lst) == 0:
             return self
         elif len(lst) % 2 == 1:
