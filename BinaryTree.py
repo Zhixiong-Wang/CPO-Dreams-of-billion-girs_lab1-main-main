@@ -43,11 +43,11 @@ class BinaryNode(object):  # The node of binary balanced tree
 
 class BTree(object):  # The class of binary balanced tree
     def __init__(self: 'BTree'):
-        self.r = None  # type: Union[BinaryNode, None]
+        self.r = None
 
     def insert(self: 'BTree', k: Optional[K], d: Optional[D]) -> None:
         # insert the node (k,d)
-        self.r = self._insert(self.r, k, d)
+        self.r = self._insert(self.r, k, d)  # type:ignore
 
     def _insert(self, p: Union[BinaryNode, None], k: K, d: D) -> \
             'BinaryNode':
